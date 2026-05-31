@@ -45,7 +45,8 @@ export const ep04: Episode = {
         { speaker: 'narrator', text: '快十二点。娃终于睡熟了，呼吸均匀。你不敢翻身。' },
         { speaker: 'narrator', text: '厨房的灯还亮着。水池里堆着晚饭的碗，奶瓶泡在水里。明天还有明天的。' },
         { speaker: 'narrator', text: '手机屏幕亮着，是老同学的朋友圈："正式升任部门负责人，感谢团队。"配图是一束花。' },
-        { speaker: 'narrator', text: '你滑回自己的主页。最近三年，一条都没发过。简历也是。光标在"工作经历"那一栏，空着，闪。' },
+        { speaker: 'narrator', text: '你翻自己的相册。三年了，几千张里没有一张是你自己——全是娃。你的微信名还停在产检那阵改的那个。' },
+        { speaker: 'narrator', text: '前同事的群，热闹得插不上话，你上周悄悄退了，没人发现。' },
         { speaker: 'narrator', text: '你也不知道想找谁说。手指点开了这条不知道哪天存下的链接。' },
         { speaker: 'narrator', text: '拨号音很长。比一般的电话长得多。' },
       ],
@@ -102,7 +103,7 @@ export const ep04: Episode = {
     q_problem: {
       kind: 'choice',
       choiceId: 'q_problem',
-      prompt: '（你看了一眼隔壁房间的门，又看了眼那栏空白的简历。）',
+      prompt: '（你看了一眼隔壁房间的门，又看了眼手机相册里那个三年没出现过自己的你。）',
       options: [
         {
           id: 'wasted',
@@ -129,14 +130,10 @@ export const ep04: Episode = {
       kind: 'scene',
       next: 'q_data',
       lines: [
-        { speaker: 'rocky', text: '停。一个词，我要纠正。' },
-        { speaker: 'rocky', text: '"没在工作"。错。严重错。我反对。' },
-        { speaker: 'rocky', text: '你在维持一个生命活着。让它每天醒来，吃饱，安全，不出故障。' },
-        { speaker: 'rocky', text: '在我的世界，那有名字。生命维持系统。船上最难的工程。' },
-        { speaker: 'rocky', text: '我整艘船的生命维持，一个人扛过。后来格雷斯来——她是人类，脆。氧气、压力、温度，全要为她单独搭一套。一刻不能停。' },
-        { speaker: 'rocky', text: '从来没人为这个鼓掌。它一不出事，就好像不存在。' },
-        { speaker: 'rocky', text: '可它一停，三分钟，人就死。', revealCardId: 'card_zm_lifesupport' },
-        { speaker: 'rocky', text: '生命维持。最难的系统。没人鼓掌。船还是靠它飞。' },
+        { speaker: 'rocky', text: '停。一个词，我要纠正。"没在工作"。错。严重错。我反对。' },
+        { speaker: 'rocky', text: '你在维持一个生命活着。让它每天醒来，吃饱，安全，不出故障。在我这儿，那有名字。生命维持系统。船上最难的工程。' },
+        { speaker: 'rocky', text: '我一个人扛过整艘船的。后来格雷斯来——她是人类，脆。氧气、压力、温度，全要为她单独搭一套。一刻不能停。' },
+        { speaker: 'rocky', text: '从来没人为这个鼓掌。它一不出事，就好像不存在。可它一停，三分钟，人就死。', revealCardId: 'card_zm_lifesupport' },
         { speaker: 'rocky', text: '我需要数据。你一天，做多少个这种决定。' },
       ],
     },
@@ -259,7 +256,6 @@ export const ep04: Episode = {
           lines: [
             { speaker: 'narrator', text: '你没急着去收那堆碗。你把简历翻出来，光标停在那栏空白上。' },
             { speaker: 'narrator', text: '你想了想这三年，然后认真敲下第一行字。不是"全职妈妈"四个字——是你真的学会的那样东西。' },
-            { speaker: 'rocky', text: '看。承重的那根梁，开始有人记上账了。从你自己记起。' },
           ],
         },
         {

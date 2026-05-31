@@ -255,8 +255,7 @@ export const ep01: Episode = {
         {
           when: { type: 'flagSet', key: 'agency' },
           lines: [
-            { speaker: 'narrator', text: '你翻出大一的旧笔记本，一页页找。找那道题。' },
-            { speaker: 'rocky', text: '明天，做你挑的那个问题。不是机器的。是你的。' },
+            { speaker: 'narrator', text: '你翻出大一的旧笔记本，一页页找。找那道你曾经熬到天亮的题。' },
           ],
         },
         {

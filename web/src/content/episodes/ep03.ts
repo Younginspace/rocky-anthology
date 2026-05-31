@@ -218,19 +218,19 @@ export const ep03: Episode = {
         {
           id: 'stay_help',
           label: '"我想……在这儿多留几天。明天下楼，去帮那个修车的人做点什么。"',
-          effects: [{ type: 'signal', delta: 10 }, { type: 'flag', key: 'agency', value: true }, { type: 'flag', key: 'stay', value: true }],
+          effects: [{ type: 'signal', delta: 10 }, { type: 'flag', key: 'stay', value: true }],
           next: 'end_main',
         },
         {
           id: 'send_msg',
           label: '"我想给一个一直没敢联系的人，发条消息。一句真的话。"',
-          effects: [{ type: 'signal', delta: 10 }, { type: 'flag', key: 'agency', value: true }, { type: 'flag', key: 'msg', value: true }],
+          effects: [{ type: 'signal', delta: 10 }, { type: 'flag', key: 'msg', value: true }],
           next: 'end_main',
         },
         {
           id: 'commit',
           label: '"我会继续走。但这次，带一个具体的承诺，不只是路过。"',
-          effects: [{ type: 'signal', delta: 8 }, { type: 'flag', key: 'agency', value: true }, { type: 'flag', key: 'commit', value: true }],
+          effects: [{ type: 'signal', delta: 8 }, { type: 'flag', key: 'commit', value: true }],
           next: 'end_main',
         },
       ],

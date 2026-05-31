@@ -205,8 +205,7 @@ export const ep10: Episode = {
       kind: 'scene',
       next: 'rocky_close',
       lines: [
-        { speaker: 'rocky', text: '我说个我和格雷斯的事。' },
-        { speaker: 'rocky', text: '我们见面，没有共同的词。一个也没有。两种声音，互相是噪音。' },
+        { speaker: 'rocky', text: '我说个我和格雷斯的事。我们见面，没有共同的词。一个也没有。两种声音，互相是噪音。' },
         { speaker: 'rocky', text: '我们就一个音、一个音地试。发一个，看对方收没收到，对得上，留下；对不上，扔。一点点，造出一种语言。' },
         { speaker: 'rocky', text: '那不是为了好听。是为了——我脑子里的东西，能到她脑子里。一段信息，活着穿过两个物种。' },
         { speaker: 'rocky', text: '你做的事，是一样的。你不是在求点赞。你是在造一条，能让"你"穿过去的线。' },
@@ -217,11 +216,9 @@ export const ep10: Episode = {
       kind: 'scene',
       next: 'q_next',
       lines: [
-        { speaker: 'rocky', text: '所以你看。两件事，本来就该分开摆。' },
-        { speaker: 'rocky', text: '"值不值得做"——你不表达，信息就死。这一头，永远值得。' },
+        { speaker: 'rocky', text: '所以你看。两件事，本来就该分开摆。"值不值得做"——你不表达，信息就死。这一头，永远值得。' },
         { speaker: 'rocky', text: '"有没有被收到"——这一头，是工程问题。工程问题，有下一步可以做。' },
-        { speaker: 'rocky', text: '广播给一百万个空气，和，精准发给一个会回信号的人——后面这个，传递率高得多。' },
-        { speaker: 'rocky', text: '别对着空气唱了。瞄准一个接收端。' },
+        { speaker: 'rocky', text: '广播给一百万个空气，和，精准发给一个会回信号的人——后面这个，传递率高得多。别对着空气唱了，瞄准一个接收端。' },
       ],
     },
 
@@ -263,8 +260,7 @@ export const ep10: Episode = {
           when: { type: 'flagSet', key: 'agency' },
           lines: [
             { speaker: 'narrator', text: '你新建了一个工程文件。命名的时候，光标闪了很久，然后你打下了那个人的名字。' },
-            { speaker: 'rocky', text: '明天，把那段你，发出去。瞄准一个人。让信息活着，落地。' },
-            { speaker: 'rocky', text: '发送，加接收。这次，争取凑齐两半。' },
+            { speaker: 'rocky', text: '明天，瞄准那一个人，把那段你发出去。发送，加接收，凑齐两半。' },
           ],
         },
         {

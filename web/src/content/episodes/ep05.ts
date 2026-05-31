@@ -239,8 +239,8 @@ export const ep05: Episode = {
       lines: [
         { speaker: 'rocky', text: '他走了。他每次都这样，说完最重的一句，跑去看水。' },
         { speaker: 'rocky', text: '我补一句工程的。' },
-        { speaker: 'rocky', text: '你量不出一个学生被你改了多少。正常。承重的东西，常常看不见。拆掉才知道。' },
-        { speaker: 'rocky', text: '别拆。你还在承重。' },
+        { speaker: 'rocky', text: '你量不出一个学生被你改了多少。正常。你装进他脑子里的那份备份，要很多年后，原件出事了，才被调用。' },
+        { speaker: 'rocky', text: '那时候你可能都不在场。但那艘飞船，照样飞过你的死。别熄火。你还在送人过河。' },
       ],
     },
 
@@ -251,8 +251,8 @@ export const ep05: Episode = {
         { speaker: 'rocky', text: '我说回格雷斯。我说过，我会的人类东西，都是他教的。一个老师。' },
         { speaker: 'rocky', text: '他以前是科学家，丢了前途，去当中学老师，觉得自己废了。后来人类挑他来救命，挑中的，正是他当老师练出的那个本事——把难的东西，讲给听不懂的人。' },
         { speaker: 'rocky', text: '他说，他以为教书是退而求其次。后来发现，是他做过最重要的事。' },
-        { speaker: 'rocky', text: '你量不出一个学生被你改了多少。正常。承重的东西，常常看不见。拆掉才知道。' },
-        { speaker: 'rocky', text: '别拆。你还在承重。' },
+        { speaker: 'rocky', text: '你量不出一个学生被你改了多少。正常。你存进他脑子里的那份备份，要很多年后才被调用——那时候你可能都不在场。' },
+        { speaker: 'rocky', text: '但那艘飞船，照样飞过你的死。别熄火。你还在送人过河。' },
       ],
     },
 
@@ -294,8 +294,7 @@ export const ep05: Episode = {
           when: { type: 'flagSet', key: 'agency' },
           lines: [
             { speaker: 'narrator', text: '你想起那个孩子坐在最后一排的样子，想起你其实一直知道他叫什么，只是从没好好叫过。' },
-            { speaker: 'rocky', text: '明天，做那件量不出来的小事。不为分数。为那一个人。' },
-            { speaker: 'rocky', text: '那也是修桥。只是桥，是个孩子。' },
+            { speaker: 'rocky', text: '明天那件量不出来的小事，也是修桥。只是桥，是个孩子。' },
           ],
         },
         {

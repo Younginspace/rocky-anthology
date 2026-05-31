@@ -213,7 +213,7 @@ export const ep02: Episode = {
         {
           id: 'send_now',
           label: '"我现在就给我妈发那条消息。趁我还有勇气。"',
-          effects: [{ type: 'signal', delta: 10 }, { type: 'flag', key: 'agency', value: true }, { type: 'flag', key: 'msg', value: true }],
+          effects: [{ type: 'signal', delta: 10 }, { type: 'flag', key: 'msg', value: true }],
           next: 'end_main',
         },
         {
@@ -240,7 +240,7 @@ export const ep02: Episode = {
           ],
         },
         {
-          when: { type: 'flagSet', key: 'agency' },
+          when: { type: 'and', all: [{ type: 'flagSet', key: 'agency' }, { type: 'not', cond: { type: 'flagSet', key: 'msg' } }] },
           lines: [
             { speaker: 'narrator', text: '你削好了两支笔，把准考证放进透明袋，端起那杯凉牛奶，一口喝完。' },
           ],

@@ -129,10 +129,10 @@ export const ep07: Episode = {
       kind: 'scene',
       next: 'rocky_function',
       lines: [
-        { speaker: 'rocky', text: '我听明白一件事。你把"我是谁"，全压在"我的职位"这一条上。' },
-        { speaker: 'rocky', text: '工程上，这有名字。单一负载路径。整座结构，就靠一根梁吊着。' },
-        { speaker: 'rocky', text: '一根梁断，全塌。我们管这叫——单点故障。我不喜欢单点故障。设计得不好。' },
-        { speaker: 'rocky', text: '不是你不行。是这个"全压一根梁"的设计，本来就脆。脆。脆脆。' },
+        { speaker: 'rocky', text: '我听明白一件事。你把"我是谁"，全压在"我那个职位"上。把操作员，和他执行的那个功能，焊成了一个。' },
+        { speaker: 'rocky', text: '工程上，这两个，从来不是一个东西。功能，是机器跑的那段活。操作员，是决定让机器跑什么、它跑歪了谁来修的那个。' },
+        { speaker: 'rocky', text: '你被卸下来的，是一个功能岗。不是那个操作员。' },
+        { speaker: 'rocky', text: '不是你不行。是你把自己，错认成了一段可以被接管的功能。' },
       ],
     },
 
@@ -188,10 +188,9 @@ export const ep07: Episode = {
       lines: [
         { speaker: 'rocky', text: '等一下。这个，我船上有个人，比我懂。她被时代换下来过。' },
         { speaker: 'rocky', text: '格雷斯！过来。一个地球人，时代不要他了。' },
-        { speaker: 'grace', text: '嘿，我是格雷斯。我听到了一点。' },
-        { speaker: 'grace', text: '我以前是搞科研的。后来我那套理论被推翻，整个学术圈把我请了出去。三十多岁，跟你差不多。我以为我这辈子完了。' },
-        { speaker: 'grace', text: '我去当了中学老师。所有人都说屈才，我自己也觉得是降级、是认输。' },
-        { speaker: 'grace', text: '结果你知道吗——我会的那个"教"，在另一个地方，刚好是最被需要的。后来它救了两颗星球。' },
+        { speaker: 'grace', text: '嘿，我是格雷斯。我听到了一点。我跟你说一句我花了很多年才懂的：' },
+        { speaker: 'grace', text: '我会的那个"教"，在另一个地方，刚好是最被需要的。' },
+        { speaker: 'grace', text: '我也被时代换下来过，岗位没了，以为自己整个人都作废了。后来才发现——作废的是那个头衔，不是我会的本事。本事换了个地方，照样吃香。' },
         { speaker: 'grace', text: '换下来的是你那个"岗位"。不是你会的所有东西。这俩，别一起埋了。' },
         { speaker: 'grace', text: '行了，我去看仪器。Rocky，让他把数据摆出来。' },
         { speaker: 'rocky', text: '正在摆。陈述。' },
@@ -214,8 +213,7 @@ export const ep07: Episode = {
       next: 'q_next',
       lines: [
         { speaker: 'rocky', text: '还有一件事。你几天没跟家里说。一个人扛。' },
-        { speaker: 'rocky', text: '我也一个人扛过。我的船，23 个 Eridian，到这儿，活 1 个。我。剩下的载荷，全压我一个身上。' },
-        { speaker: 'rocky', text: '一个人扛，结构最容易在没人看见的地方，先裂。我知道。' },
+        { speaker: 'rocky', text: '我也一个人扛过。一个人扛，结构最容易在没人看见的地方，先裂。我知道。' },
         { speaker: 'rocky', text: '家里人，也是结构的一部分。一根梁卸了，告诉别的梁，它们好分担。瞒着，它们使不上力。' },
         { speaker: 'rocky', text: '你怕被他们看成失败的那个。我说一句——他们要的是你这个人。不是你那个工资条。' },
       ],
@@ -235,7 +233,7 @@ export const ep07: Episode = {
         {
           id: 'tell_family',
           label: '"我想……明早跟我老婆说实话。不再一个人扛了。"',
-          effects: [{ type: 'signal', delta: 12 }, { type: 'flag', key: 'agency', value: true }, { type: 'flag', key: 'told_family', value: true }],
+          effects: [{ type: 'signal', delta: 12 }, { type: 'flag', key: 'told_family', value: true }],
           next: 'end_main',
         },
         {
@@ -263,7 +261,7 @@ export const ep07: Episode = {
           ],
         },
         {
-          when: { type: 'flagSet', key: 'agency' },
+          when: { type: 'and', all: [{ type: 'flagSet', key: 'agency' }, { type: 'not', cond: { type: 'flagSet', key: 'told_family' } }] },
           lines: [
             { speaker: 'narrator', text: '你打开手机备忘录，新建了一页。光标闪着，等你写下第一行。' },
             { speaker: 'rocky', text: '明天，造你的第二条路径。一条就够开始。冗余，是一条一条加上去的。' },

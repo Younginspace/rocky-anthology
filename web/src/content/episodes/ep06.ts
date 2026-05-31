@@ -219,13 +219,13 @@ export const ep06: Episode = {
         {
           id: 'send_honest',
           label: '"有个人我一直不敢面对。我想给他发条消息——不是解释，就是承认，加一句谢谢。"',
-          effects: [{ type: 'signal', delta: 12 }, { type: 'flag', key: 'agency', value: true }, { type: 'flag', key: 'reach_out', value: true }],
+          effects: [{ type: 'signal', delta: 12 }, { type: 'flag', key: 'reach_out', value: true }],
           next: 'end_main',
         },
         {
           id: 'write_lesson',
           label: '"我想写下来——这次失败里，我真的学到、下次用得上的一件事。就一件。"',
-          effects: [{ type: 'signal', delta: 11 }, { type: 'flag', key: 'agency', value: true }, { type: 'flag', key: 'wrote_lesson', value: true }],
+          effects: [{ type: 'signal', delta: 11 }, { type: 'flag', key: 'wrote_lesson', value: true }],
           next: 'end_main',
         },
         {
@@ -250,7 +250,6 @@ export const ep06: Episode = {
           lines: [
             { speaker: 'narrator', text: '你点开那个躲了一个月的对话框。删掉了好几版辩解。最后只留下三行：对不起，工资我一定补上。这三年，谢谢你信我。' },
             { speaker: 'rocky', text: '诚实的信号，最难发。也最值。明天，按发送。' },
-            { speaker: 'rocky', text: '失败的任务，不是失败的工程师。下一个任务，会需要你这次学到的。' },
           ],
         },
         {
@@ -258,7 +257,6 @@ export const ep06: Episode = {
           lines: [
             { speaker: 'narrator', text: '你撕下一张便利贴，写下那一件事——不是后悔的事，是真的学会的事。然后贴在屏幕边上。' },
             { speaker: 'rocky', text: '把数据存好。下一个任务，会需要它。' },
-            { speaker: 'rocky', text: '失败的任务，不是失败的工程师。你还在迭代。够了。' },
           ],
         },
         {
