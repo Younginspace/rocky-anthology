@@ -157,9 +157,13 @@ function init(): AppState {
   let session: Session | null = null;
   if (blob.session) {
     const ep = episodeById[blob.session.episodeId];
-    if (ep) {
-      // Rebuild a minimal transcript from the resumed node so the screen isn't blank.
-      const transcript = appendNodeLines([], ep, blob.session.state);
+    // Semantic guard: the episode AND the resumed node must still exist, else
+    // a stale/old save would throw in currentView and soft-brick on every load.
+    if (ep && ep.nodes[blob.session.state.nodeId]) {
+      // Prefer the persisted full transcript; fall back to rebuilding from the
+      // current node so the screen is never blank.
+      const saved = blob.session.transcript as unknown as TranscriptItem[];
+      const transcript = saved.length ? saved : appendNodeLines([], ep, blob.session.state);
       session = { episodeId: blob.session.episodeId, state: blob.session.state, transcript };
       screen = 'incall';
     }
@@ -178,11 +182,14 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, undefined, init);
 
   useEffect(() => {
-    // Persist progress + a lean session (transcript is rebuilt on load).
+    // Persist progress + the full session (incl. transcript) so a refresh
+    // resumes the conversation exactly where it was.
     save({
       version: 1,
       progress: state.progress,
-      session: state.session ? { episodeId: state.session.episodeId, state: state.session.state } : null,
+      session: state.session
+        ? { episodeId: state.session.episodeId, state: state.session.state, transcript: state.session.transcript }
+        : null,
     });
   }, [state.progress, state.session]);
 

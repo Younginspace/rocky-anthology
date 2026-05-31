@@ -56,7 +56,7 @@ export function InCall() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0 }}>
       <div className="scroll pad" ref={scrollRef}>
-        <div className="tx-area">
+        <div className="tx-area" aria-live="polite" aria-relevant="additions">
           {session.transcript.map((item) => <Line item={item} key={item.key} />)}
           {view.kind === 'ending' && <EndingPanel ep={ep} />}
         </div>

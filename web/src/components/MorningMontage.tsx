@@ -1,6 +1,6 @@
 import { episodes } from '../content';
 import { useGame } from '../state/gameStore';
-import { ACCENT_VAR } from '../lib/ui';
+import { accentStyle } from '../lib/ui';
 
 export function MorningMontage() {
   const { progress, dispatch } = useGame();
@@ -14,7 +14,7 @@ export function MorningMontage() {
         <p className="m-dawn">那一夜，这条线接了很多通电话。<br />天亮以后，地球的另一头，他们各自醒来——</p>
 
         {done.map((ep, i) => (
-          <div className="m-beat" key={ep.id} style={{ animationDelay: `${i * 0.25 + 0.2}s`, ['--accentc' as string]: ACCENT_VAR[ep.caller.accent] }}>
+          <div className="m-beat" key={ep.id} style={{ animationDelay: `${i * 0.25 + 0.2}s`, ...accentStyle(ep.caller.accent) }}>
             <span className="m-dot" />
             <span style={{ flex: 1 }}>
               <span className="m-who">{ep.caller.realName} · {ep.caller.tagline}</span>

@@ -98,6 +98,10 @@ body {
 button { font-family: inherit; color: inherit; cursor: pointer; background: none; border: none; }
 ::selection { background: var(--accent-cyan); color: #04110d; }
 
+/* Keyboard focus — this is a choice-driven game; never strip focus rings. */
+:focus-visible { outline: 2px solid var(--accentc, var(--accent-cyan)); outline-offset: 2px; border-radius: 6px; }
+.btn:focus-visible, .choice:focus-visible, .call:focus-visible { outline-offset: 3px; }
+
 /* ── Cosmic backdrop ── */
 .cosmos {
   position: fixed; inset: 0; z-index: 0; overflow: hidden;

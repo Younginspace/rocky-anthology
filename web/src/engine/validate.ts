@@ -161,7 +161,6 @@ export function validateEpisode(ep: Episode): ValidationResult {
       if (canReachEnding.has(id)) continue;
       const node = ep.nodes[id];
       const edges = outEdges(node);
-      if (edges.length > 0 && edges.every(() => false)) continue;
       if (edges.some((t) => canReachEnding.has(t))) {
         canReachEnding.add(id);
         changed = true;
