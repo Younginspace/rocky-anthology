@@ -1,43 +1,10 @@
-import { createContext, useContext, useEffect, useMemo, useReducer } from 'react';
+import { useEffect, useMemo, useReducer } from 'react';
 import type { ReactNode } from 'react';
 import type { CurrentView, Episode, GameState, SpeakerId } from '../engine/types';
 import { choose, continueScene, currentView, startEpisode } from '../engine/engine';
-import { episodeById, episodes } from '../content';
-import { load, save, wipe, type Progress } from './persistence';
-
-export type Screen = 'boot' | 'archive' | 'incall' | 'cards' | 'montage';
-
-export interface TranscriptItem {
-  key: string;
-  speaker: SpeakerId;
-  text: string;
-  stage?: string;
-}
-
-export interface Session {
-  episodeId: string;
-  state: GameState;
-  transcript: TranscriptItem[];
-}
-
-export interface AppState {
-  screen: Screen;
-  progress: Progress;
-  session: Session | null;
-  /** Cards unlocked by the most recent step, surfaced as a toast. */
-  pendingCards: string[];
-}
-
-type Action =
-  | { type: 'BOOT_DONE' }
-  | { type: 'GO'; screen: Screen }
-  | { type: 'START'; episodeId: string }
-  | { type: 'CONTINUE' }
-  | { type: 'CHOOSE'; optionId: string }
-  | { type: 'FINISH_CALL' }
-  | { type: 'MONTAGE_DONE' }
-  | { type: 'DISMISS_CARDS' }
-  | { type: 'RESET' };
+import { cardById, episodeById, episodes } from '../content';
+import { load, save, type Progress } from './persistence';
+import { GameCtx, type Action, type AppState, type Screen, type Session, type Store, type TranscriptItem } from './gameContext';
 
 function linesForView(view: CurrentView): { speaker: SpeakerId; text: string; stage?: string }[] {
   if (view.kind === 'scene' || view.kind === 'ending') return view.lines;
@@ -73,8 +40,9 @@ function step(
   let next: GameState;
   try {
     next = run(ep, state.session.state);
-  } catch (err) {
-    console.error('[engine] step failed:', err);
+  } catch {
+    // Engine guards + the validator should prevent this; degrade gracefully
+    // by staying on the current state rather than crashing. (Reducer stays pure.)
     return state;
   }
   const transcript = appendNodeLines([...state.session.transcript, ...preItems], ep, next);
@@ -138,7 +106,8 @@ function reducer(state: AppState, action: Action): AppState {
       return { ...state, pendingCards: [] };
 
     case 'RESET':
-      wipe();
+      // Pure: return fresh state. The persistence effect writes the empty blob,
+      // which is equivalent to wiping. (No side effects inside the reducer.)
       return {
         screen: 'archive',
         progress: { completedEpisodes: [], unlockedCards: [], montageSeen: false, bootSeen: true },
@@ -153,30 +122,37 @@ function reducer(state: AppState, action: Action): AppState {
 
 function init(): AppState {
   const blob = load();
+
+  // Normalize persisted progress against the live registry: drop unknown ids
+  // and de-dupe, so a corrupted same-version save can't inflate counts or
+  // wedge the "all episodes done?" check.
+  const knownEpisodes = new Set(episodes.map((e) => e.id));
+  const progress: Progress = {
+    ...blob.progress,
+    completedEpisodes: Array.from(new Set(blob.progress.completedEpisodes.filter((id) => knownEpisodes.has(id)))),
+    unlockedCards: Array.from(new Set(blob.progress.unlockedCards.filter((id) => id in cardById))),
+  };
+
   let screen: Screen = 'boot';
   let session: Session | null = null;
   if (blob.session) {
     const ep = episodeById[blob.session.episodeId];
-    // Semantic guard: the episode AND the resumed node must still exist, else
-    // a stale/old save would throw in currentView and soft-brick on every load.
-    if (ep && ep.nodes[blob.session.state.nodeId]) {
-      // Prefer the persisted full transcript; fall back to rebuilding from the
-      // current node so the screen is never blank.
+    const st = blob.session.state;
+    const node = ep?.nodes[st.nodeId];
+    // Resume only if everything lines up: episode exists, the node exists and is
+    // renderable (not a branch), and the state's own episodeId matches. Anything
+    // else (stale/corrupt save) falls through to a fresh archive instead of
+    // throwing in currentView and tripping the error boundary on every load.
+    if (ep && node && node.kind !== 'branch' && st.episodeId === blob.session.episodeId) {
       const saved = blob.session.transcript as unknown as TranscriptItem[];
-      const transcript = saved.length ? saved : appendNodeLines([], ep, blob.session.state);
-      session = { episodeId: blob.session.episodeId, state: blob.session.state, transcript };
+      const transcript = saved.length ? saved : appendNodeLines([], ep, st);
+      session = { episodeId: blob.session.episodeId, state: st, transcript };
       screen = 'incall';
     }
   }
-  if (!session && blob.progress.bootSeen) screen = 'archive';
-  return { screen, progress: blob.progress, session, pendingCards: [] };
+  if (!session && progress.bootSeen) screen = 'archive';
+  return { screen, progress, session, pendingCards: [] };
 }
-
-interface Store extends AppState {
-  dispatch: React.Dispatch<Action>;
-}
-
-const Ctx = createContext<Store | null>(null);
 
 export function GameProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, undefined, init);
@@ -194,11 +170,5 @@ export function GameProvider({ children }: { children: ReactNode }) {
   }, [state.progress, state.session]);
 
   const value = useMemo<Store>(() => ({ ...state, dispatch }), [state]);
-  return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
-}
-
-export function useGame(): Store {
-  const ctx = useContext(Ctx);
-  if (!ctx) throw new Error('useGame must be used within GameProvider');
-  return ctx;
+  return <GameCtx.Provider value={value}>{children}</GameCtx.Provider>;
 }

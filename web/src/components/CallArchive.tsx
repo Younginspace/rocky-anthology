@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { Episode } from '../engine/types';
 import { episodes, TOTAL_CARDS } from '../content';
-import { useGame } from '../state/gameStore';
+import { useGame } from '../state/gameContext';
 import { accentStyle, handleInitials } from '../lib/ui';
 import { IncomingCall } from './IncomingCall';
 
@@ -19,9 +19,10 @@ export function CallArchive() {
     );
   }
 
-  const doneCount = progress.completedEpisodes.length;
+  const completedSet = new Set(progress.completedEpisodes);
+  const doneCount = episodes.filter((e) => completedSet.has(e.id)).length;
   const cardCount = progress.unlockedCards.length;
-  const allDone = doneCount === episodes.length;
+  const allDone = episodes.every((e) => completedSet.has(e.id));
 
   return (
     <div className="scroll">

@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import type { Episode } from '../engine/types';
 import { currentView } from '../engine/engine';
 import { episodeById } from '../content';
-import { useGame, type TranscriptItem } from '../state/gameStore';
+import { useGame, type TranscriptItem } from '../state/gameContext';
 import { accentStyle, SPEAKER_LABEL } from '../lib/ui';
 import { WisdomCardView } from './WisdomCardView';
 
@@ -48,7 +48,9 @@ export function InCall() {
 
   useEffect(() => {
     const el = scrollRef.current;
-    if (el) el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+    if (!el) return;
+    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    el.scrollTo({ top: el.scrollHeight, behavior: reduce ? 'auto' : 'smooth' });
   }, [session?.transcript.length, view?.kind]);
 
   if (!session || !ep || !view) return null;

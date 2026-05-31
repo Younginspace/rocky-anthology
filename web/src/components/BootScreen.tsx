@@ -1,4 +1,4 @@
-import { useGame } from '../state/gameStore';
+import { useGame } from '../state/gameContext';
 
 const BOOT_LINES: Array<[string, string]> = [
   ['ERID 深空通讯阵列', '在线'],

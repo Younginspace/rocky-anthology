@@ -134,8 +134,9 @@ function enterNode(episode: Episode, state: GameState, targetId: string): GameSt
       : [...state.history, nodeId],
   };
 
-  // Unlock cards referenced by lines of the node we just entered.
-  const lineCards = collectLineCards(node);
+  // Unlock cards referenced by the lines that will actually be VISIBLE on this
+  // node (for endings, only variants whose condition matches the entered state).
+  const lineCards = collectLineCards(node, next);
   if (lineCards.length) {
     next.unlockedCards = unionCards(state.unlockedCards, lineCards);
   }
@@ -147,7 +148,7 @@ function enterNode(episode: Episode, state: GameState, targetId: string): GameSt
   return next;
 }
 
-function collectLineCards(node: StoryNode): string[] {
+function collectLineCards(node: StoryNode, state: GameState): string[] {
   const out: string[] = [];
   const pull = (lines: Line[]) => {
     for (const l of lines) if (l.revealCardId) out.push(l.revealCardId);
@@ -155,7 +156,10 @@ function collectLineCards(node: StoryNode): string[] {
   if (node.kind === 'scene') pull(node.lines);
   if (node.kind === 'ending') {
     pull(node.lines);
-    node.variants?.forEach((v) => pull(v.lines));
+    // Only unlock cards from variants that are actually shown (matches currentView).
+    node.variants?.forEach((v) => {
+      if (evalCondition(v.when, state)) pull(v.lines);
+    });
   }
   return out;
 }

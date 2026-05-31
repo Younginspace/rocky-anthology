@@ -1,6 +1,6 @@
 import { signalTier } from '../engine/engine';
 import { episodeById } from '../content';
-import { useGame } from '../state/gameStore';
+import { useGame } from '../state/gameContext';
 import { SIGNAL_LABEL } from '../lib/ui';
 
 export function Backdrop() {

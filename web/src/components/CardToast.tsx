@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { cardById } from '../content';
-import { useGame } from '../state/gameStore';
+import { useGame } from '../state/gameContext';
 
 /** Transient "星语卡解锁" toast for newly unlocked cards. */
 export function CardToast() {
@@ -20,7 +20,7 @@ export function CardToast() {
         const card = cardById[id];
         if (!card) return null;
         return (
-          <div className="toast" key={id} role="status" onClick={() => dispatch({ type: 'DISMISS_CARDS' })}>
+          <div className="toast" key={id} role="status">
             <div className="tk">★ 星语卡解锁</div>
             <div className="tt">{card.text}</div>
           </div>

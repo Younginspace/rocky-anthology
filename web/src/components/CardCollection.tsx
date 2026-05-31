@@ -1,5 +1,5 @@
 import { episodes, TOTAL_CARDS } from '../content';
-import { useGame } from '../state/gameStore';
+import { useGame } from '../state/gameContext';
 import { WisdomCardView } from './WisdomCardView';
 
 export function CardCollection() {

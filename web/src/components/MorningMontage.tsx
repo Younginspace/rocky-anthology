@@ -1,5 +1,5 @@
 import { episodes } from '../content';
-import { useGame } from '../state/gameStore';
+import { useGame } from '../state/gameContext';
 import { accentStyle } from '../lib/ui';
 
 export function MorningMontage() {

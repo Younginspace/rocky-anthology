@@ -1,7 +1,8 @@
 import { Component, type ReactNode } from 'react';
 import './styles/game.css';
 import { wipe } from './state/persistence';
-import { GameProvider, useGame } from './state/gameStore';
+import { GameProvider } from './state/gameStore';
+import { useGame } from './state/gameContext';
 import { Backdrop, StatusBar } from './components/Chrome';
 import { BootScreen } from './components/BootScreen';
 import { CallArchive } from './components/CallArchive';
