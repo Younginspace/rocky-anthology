@@ -17,14 +17,23 @@ export type SpeakerId = 'rocky' | 'grace' | 'caller' | 'narrator' | 'system';
 
 export type FlagValue = boolean | number | string;
 
+export type Lang = 'zh' | 'en';
+
+/**
+ * A piece of player-facing text. During the zh→bilingual migration this is a
+ * union: legacy plain strings still compile, and `loc()` resolves either form.
+ * New content uses the { zh, en } form.
+ */
+export type LocalizedText = string | { zh: string; en: string };
+
 /** A single beat of text from one speaker. */
 export interface Line {
   speaker: SpeakerId;
-  text: string;
+  text: LocalizedText;
   /** Unlock this card the moment this line is reached (idempotent). */
   revealCardId?: string;
   /** Optional stage direction shown in muted italics (e.g. "[通讯延迟 4 秒]"). */
-  stage?: string;
+  stage?: LocalizedText;
 }
 
 /** A choice the player (as the caller) can make. */
@@ -32,7 +41,7 @@ export interface ChoiceOption {
   /** Stable within the choice node. Used for save/history/tests. */
   id: string;
   /** What the caller says / thinks — shown to the player. */
-  label: string;
+  label: LocalizedText;
   /** Applied exactly once when this option is chosen (idempotent guard). */
   effects?: Effect[];
   /** Next node id. */
@@ -66,7 +75,7 @@ export type StoryNode =
   /** A block of sequential lines; UI reveals them one at a time. */
   | { kind: 'scene'; lines: Line[]; next: string }
   /** Player picks an option. */
-  | { kind: 'choice'; choiceId: string; prompt?: string; options: ChoiceOption[] }
+  | { kind: 'choice'; choiceId: string; prompt?: LocalizedText; options: ChoiceOption[] }
   /** Engine auto-routes by condition (no UI). */
   | { kind: 'branch'; branches: Array<{ when: Condition; goto: string }>; else: string }
   /** Terminal node. base lines + any matching variant paragraphs. */
@@ -80,7 +89,7 @@ export type StoryNode =
 export interface WisdomCard {
   id: string;
   /** The line itself. */
-  text: string;
+  text: LocalizedText;
   speaker: SpeakerId;
   episodeId: string;
 }
@@ -89,18 +98,18 @@ export interface CallerProfile {
   id: string;
   /** Comms handle / codename, e.g. "LW-0207". */
   handle: string;
-  realName: string;
+  realName: LocalizedText;
   age: number;
   /** Where they're calling from. */
-  location: string;
+  location: LocalizedText;
   /** One-line who-they-are, shown on the incoming-call card. */
-  tagline: string;
+  tagline: LocalizedText;
   /** The "why they called" framing line(s) for the dial-in screen. */
-  reason: string;
+  reason: LocalizedText;
   /** Revealed in the archive after completion: where they ended up. */
-  outcomeShort: string;
+  outcomeShort: LocalizedText;
   /** One line for the "morning after" montage. */
-  morningBeat: string;
+  morningBeat: LocalizedText;
   /** Visual accent color key for this caller. */
   accent: 'amber' | 'cyan' | 'violet' | 'rose' | 'green' | 'gold';
 }
@@ -109,11 +118,11 @@ export interface Episode {
   id: string;
   /** Episode number for ordering / display. */
   order: number;
-  title: string;
-  subtitle?: string;
+  title: LocalizedText;
+  subtitle?: LocalizedText;
   caller: CallerProfile;
   /** One-sentence theme, for the archive. */
-  theme: string;
+  theme: LocalizedText;
   startNodeId: string;
   nodes: Record<string, StoryNode>;
   cards: WisdomCard[];
@@ -146,7 +155,7 @@ export type CurrentView =
   | {
       kind: 'choice';
       nodeId: string;
-      prompt?: string;
-      options: Array<{ id: string; label: string }>;
+      prompt?: LocalizedText;
+      options: Array<{ id: string; label: LocalizedText }>;
     }
   | { kind: 'ending'; nodeId: string; endingId: string; lines: Line[] };

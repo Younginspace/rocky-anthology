@@ -1,4 +1,6 @@
 import type { Episode } from '../engine/types';
+import { useGame } from '../state/gameContext';
+import { loc, UI } from '../lib/i18n';
 import { accentStyle, handleInitials } from '../lib/ui';
 
 export function IncomingCall({
@@ -10,21 +12,25 @@ export function IncomingCall({
   onAnswer: () => void;
   onDismiss: () => void;
 }) {
+  const { lang } = useGame();
+  const t = UI[lang];
   const c = ep.caller;
   return (
     <div className="incoming scroll fadein" style={accentStyle(c.accent)}>
-      <div className="ring-pulse">
-        <div className="halo" /><div className="halo" /><div className="halo" />
-        <div className="core">{handleInitials(c.handle)}</div>
-      </div>
-      <div className="who-kicker">来电接入 · INCOMING</div>
-      <div className="who-name">{c.realName}</div>
-      <div className="who-line">{c.tagline}</div>
-      <div className="who-meta">{c.age} 岁 · {c.location}</div>
-      <p className="reason">{c.reason}</p>
-      <div className="actions">
-        <button className="btn ghost" onClick={onDismiss}>稍后</button>
-        <button className="btn" onClick={onAnswer}>接听 ●</button>
+      <div className="incoming-inner">
+        <div className="ring-pulse">
+          <div className="halo" /><div className="halo" /><div className="halo" />
+          <div className="core">{handleInitials(c.handle)}</div>
+        </div>
+        <div className="who-kicker">{t.incomingKicker}</div>
+        <div className="who-name">{loc(c.realName, lang)}</div>
+        <div className="who-line">{loc(c.tagline, lang)}</div>
+        <div className="who-meta">{c.age}{t.ageSuffix}{loc(c.location, lang)}</div>
+        <p className="reason">{loc(c.reason, lang)}</p>
+        <div className="actions">
+          <button className="btn ghost" onClick={onDismiss}>{t.later}</button>
+          <button className="btn" onClick={onAnswer}>{t.answer}</button>
+        </div>
       </div>
     </div>
   );

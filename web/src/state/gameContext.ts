@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import type { GameState, SpeakerId } from '../engine/types';
+import type { GameState, Lang, LocalizedText, SpeakerId } from '../engine/types';
 import type { Progress } from './persistence';
 
 /**
@@ -13,14 +13,17 @@ export type Screen = 'boot' | 'archive' | 'incall' | 'cards' | 'montage';
 export interface TranscriptItem {
   key: string;
   speaker: SpeakerId;
-  text: string;
-  stage?: string;
+  text: LocalizedText;
+  stage?: LocalizedText;
 }
 
 export interface Session {
   episodeId: string;
   state: GameState;
   transcript: TranscriptItem[];
+  /** Transient (not persisted): true when restored from a save, so the UI
+   *  shows the existing transcript instantly instead of re-animating it. */
+  resumed?: boolean;
 }
 
 export interface AppState {
@@ -29,6 +32,8 @@ export interface AppState {
   session: Session | null;
   /** Cards unlocked by the most recent step, surfaced as a toast. */
   pendingCards: string[];
+  /** Active display language. */
+  lang: Lang;
 }
 
 export type Action =
@@ -40,6 +45,7 @@ export type Action =
   | { type: 'FINISH_CALL' }
   | { type: 'MONTAGE_DONE' }
   | { type: 'DISMISS_CARDS' }
+  | { type: 'SET_LANG'; lang: Lang }
   | { type: 'RESET' };
 
 export interface Store extends AppState {

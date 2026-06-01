@@ -1,6 +1,7 @@
 import { Component, type ReactNode } from 'react';
 import './styles/game.css';
-import { wipe } from './state/persistence';
+import { load, wipe } from './state/persistence';
+import { UI } from './lib/i18n';
 import { GameProvider } from './state/gameStore';
 import { useGame } from './state/gameContext';
 import { Backdrop, StatusBar } from './components/Chrome';
@@ -17,13 +18,16 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { error: Error | 
   componentDidCatch(error: Error) { console.error('[app] render error:', error); }
   render() {
     if (this.state.error) {
+      const t = UI[load().lang];
       return (
         <div className="boot" style={{ height: '100dvh' }}>
-          <div className="boot-title" style={{ fontSize: 26 }}>通讯中断</div>
-          <p className="boot-tag">链路出现异常。先试试重新接入；若反复失败，可清除本地存档后重启。</p>
-          <div className="end-actions" style={{ marginTop: 24 }}>
-            <button className="btn" onClick={() => location.reload()}>重新接入 ↻</button>
-            <button className="btn ghost" onClick={() => { wipe(); location.reload(); }}>清除存档并重启</button>
+          <div className="boot-inner">
+            <div className="boot-title" style={{ fontSize: 26 }}>{t.errTitle}</div>
+            <p className="boot-tag">{t.errBody}</p>
+            <div className="end-actions" style={{ marginTop: 24 }}>
+              <button className="btn" onClick={() => location.reload()}>{t.errReconnect}</button>
+              <button className="btn ghost" onClick={() => { wipe(); location.reload(); }}>{t.errWipe}</button>
+            </div>
           </div>
         </div>
       );

@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useReducer } from 'react';
 import type { ReactNode } from 'react';
-import type { CurrentView, Episode, GameState, SpeakerId } from '../engine/types';
+import type { CurrentView, Episode, GameState, LocalizedText, SpeakerId } from '../engine/types';
 import { choose, continueScene, currentView, startEpisode } from '../engine/engine';
 import { cardById, episodeById, episodes } from '../content';
 import { load, save, type Progress } from './persistence';
 import { GameCtx, type Action, type AppState, type Screen, type Session, type Store, type TranscriptItem } from './gameContext';
 
-function linesForView(view: CurrentView): { speaker: SpeakerId; text: string; stage?: string }[] {
+function linesForView(view: CurrentView): { speaker: SpeakerId; text: LocalizedText; stage?: LocalizedText }[] {
   if (view.kind === 'scene' || view.kind === 'ending') return view.lines;
   return [];
 }
@@ -105,6 +105,9 @@ function reducer(state: AppState, action: Action): AppState {
     case 'DISMISS_CARDS':
       return { ...state, pendingCards: [] };
 
+    case 'SET_LANG':
+      return { ...state, lang: action.lang };
+
     case 'RESET':
       // Pure: return fresh state. The persistence effect writes the empty blob,
       // which is equivalent to wiping. (No side effects inside the reducer.)
@@ -113,6 +116,7 @@ function reducer(state: AppState, action: Action): AppState {
         progress: { completedEpisodes: [], unlockedCards: [], montageSeen: false, bootSeen: true },
         session: null,
         pendingCards: [],
+        lang: state.lang,
       };
 
     default:
@@ -146,12 +150,12 @@ function init(): AppState {
     if (ep && node && node.kind !== 'branch' && st.episodeId === blob.session.episodeId) {
       const saved = blob.session.transcript as unknown as TranscriptItem[];
       const transcript = saved.length ? saved : appendNodeLines([], ep, st);
-      session = { episodeId: blob.session.episodeId, state: st, transcript };
+      session = { episodeId: blob.session.episodeId, state: st, transcript, resumed: true };
       screen = 'incall';
     }
   }
   if (!session && progress.bootSeen) screen = 'archive';
-  return { screen, progress, session, pendingCards: [] };
+  return { screen, progress, session, pendingCards: [], lang: blob.lang };
 }
 
 export function GameProvider({ children }: { children: ReactNode }) {
@@ -166,8 +170,9 @@ export function GameProvider({ children }: { children: ReactNode }) {
       session: state.session
         ? { episodeId: state.session.episodeId, state: state.session.state, transcript: state.session.transcript }
         : null,
+      lang: state.lang,
     });
-  }, [state.progress, state.session]);
+  }, [state.progress, state.session, state.lang]);
 
   const value = useMemo<Store>(() => ({ ...state, dispatch }), [state]);
   return <GameCtx.Provider value={value}>{children}</GameCtx.Provider>;

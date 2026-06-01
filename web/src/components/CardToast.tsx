@@ -1,15 +1,17 @@
 import { useEffect } from 'react';
 import { cardById } from '../content';
 import { useGame } from '../state/gameContext';
+import { loc, UI } from '../lib/i18n';
 
-/** Transient "星语卡解锁" toast for newly unlocked cards. */
+/** Transient "wisdom unlocked" toast for newly unlocked cards. */
 export function CardToast() {
-  const { pendingCards, dispatch } = useGame();
+  const { pendingCards, dispatch, lang } = useGame();
+  const t = UI[lang];
 
   useEffect(() => {
     if (pendingCards.length === 0) return;
-    const t = setTimeout(() => dispatch({ type: 'DISMISS_CARDS' }), 4200);
-    return () => clearTimeout(t);
+    const timer = setTimeout(() => dispatch({ type: 'DISMISS_CARDS' }), 4200);
+    return () => clearTimeout(timer);
   }, [pendingCards, dispatch]);
 
   if (pendingCards.length === 0) return null;
@@ -21,8 +23,8 @@ export function CardToast() {
         if (!card) return null;
         return (
           <div className="toast" key={id} role="status">
-            <div className="tk">★ 星语卡解锁</div>
-            <div className="tt">{card.text}</div>
+            <div className="tk">{t.cardUnlocked}</div>
+            <div className="tt">{loc(card.text, lang)}</div>
           </div>
         );
       })}

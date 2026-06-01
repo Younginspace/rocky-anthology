@@ -1,4 +1,4 @@
-import type { GameState } from '../engine/types';
+import type { GameState, Lang, LocalizedText } from '../engine/types';
 
 /**
  * Versioned localStorage persistence. If the schema version changes or the
@@ -18,8 +18,8 @@ export interface Progress {
 export interface SavedTranscriptItem {
   key: string;
   speaker: string;
-  text: string;
-  stage?: string;
+  text: LocalizedText;
+  stage?: LocalizedText;
 }
 
 export interface SavedSession {
@@ -33,6 +33,8 @@ export interface SaveBlob {
   progress: Progress;
   /** The active in-call session, so a refresh resumes mid-conversation. */
   session: SavedSession | null;
+  /** Display-language preference. */
+  lang: Lang;
 }
 
 export const emptyProgress = (): Progress => ({
@@ -67,7 +69,7 @@ function validateSession(s: unknown): SavedSession | null {
   }
   const transcript = Array.isArray(sess.transcript)
     ? (sess.transcript as SavedTranscriptItem[]).filter(
-        (t) => t && typeof t.key === 'string' && typeof t.text === 'string' && typeof t.speaker === 'string',
+        (t) => t && typeof t.key === 'string' && t.text != null && typeof t.speaker === 'string',
       )
     : [];
   return { episodeId: sess.episodeId, state: state as unknown as GameState, transcript };
@@ -89,6 +91,7 @@ export function load(): SaveBlob {
         bootSeen: !!p.bootSeen,
       },
       session: validateSession(parsed.session),
+      lang: parsed.lang === 'en' ? 'en' : 'zh',
     };
   } catch {
     return fresh();
@@ -108,5 +111,5 @@ export function wipe(): void {
 }
 
 function fresh(): SaveBlob {
-  return { version: VERSION, progress: emptyProgress(), session: null };
+  return { version: VERSION, progress: emptyProgress(), session: null, lang: 'zh' };
 }
