@@ -11,6 +11,7 @@ export function CallArchive() {
   const cl = chromeLang(lang);
   const t = UI[cl];
   const [incoming, setIncoming] = useState<Episode | null>(null);
+  const [showAbout, setShowAbout] = useState(false);
 
   if (incoming) {
     return (
@@ -40,6 +41,7 @@ export function CallArchive() {
           <span><b>{doneCount}</b> / {episodes.length} {t.callsDone}</span>
           <span><b>{cardCount}</b> / {TOTAL_CARDS} {t.cardsLabel}</span>
           <button className="linkish" onClick={() => dispatch({ type: 'GO', screen: 'cards' })}>{t.openCards}</button>
+          <button className="linkish" onClick={() => dispatch({ type: 'GO', screen: 'feedback' })}>{t.fbEntry} →</button>
           {allDone && (
             <button className="linkish" onClick={() => dispatch({ type: 'GO', screen: 'montage' })}>{t.openMontage}</button>
           )}
@@ -86,7 +88,9 @@ export function CallArchive() {
       </div>
 
       <div className="pad center" style={{ paddingTop: 8 }}>
-        <p className="fan-note">
+        <button className="linkish" onClick={() => setShowAbout((v) => !v)}>{t.aboutToggle}</button>
+        {showAbout && <p className="fan-note" style={{ marginTop: 12 }}>{t.aboutBody}</p>}
+        <p className="fan-note" style={{ marginTop: 18 }}>
           {t.fanNote}{' '}
           <a className="linkish" href="https://rocky.savemoss.com" target="_blank" rel="noreferrer">rocky.savemoss.com</a>{t.fanNote2}
         </p>

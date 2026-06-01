@@ -46,7 +46,8 @@ export function MorningMontage() {
         </p>
 
         <div className="end-actions" style={{ paddingBottom: 40 }}>
-          <button className="btn" onClick={() => dispatch({ type: 'MONTAGE_DONE' })}>{t.montageBack}</button>
+          <button className="btn ghost" onClick={() => dispatch({ type: 'MONTAGE_DONE' })}>{t.montageBack}</button>
+          <button className="btn" onClick={() => dispatch({ type: 'GO', screen: 'feedback' })}>{t.fbEntry} →</button>
         </div>
       </div>
     </div>

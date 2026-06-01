@@ -572,8 +572,8 @@ export const ep03: Episode = {
             {
               speaker: 'rocky',
               text: {
-                zh: '是你和谁，一起，造了什么。去造，软软的人类。线一直开着。',
-                en: 'It is what you build, together, with someone. Go build, soft human. The line stays open.',
+                zh: '是你和谁，一起，造了什么。挂了线，先下楼。楼下那盏灯，比下一个国家近。',
+                en: 'It is what you build, together, with someone. After we hang up — go downstairs first. That light down there is closer than the next country.',
               },
             },
           ],

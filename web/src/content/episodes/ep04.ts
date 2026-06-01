@@ -16,7 +16,7 @@ import type { Episode } from '../../engine/types';
 export const ep04: Episode = {
   id: 'ep04',
   order: 4,
-  title: { zh: '看不见的工程', en: 'The Invisible Engineering' },
+  title: { zh: '凌晨的厨房', en: 'The Kitchen at 1 A.M.' },
   subtitle: { zh: '周敏 · 全职妈妈 / 怀疑当初辞职带娃', en: 'Zhou Min · Full-time mom, second-guessing the day she quit' },
   theme: { zh: '当你做的事没人看见，你开始怀疑自己是不是废了', en: 'When no one sees the work you do, you start to wonder if you have gone to waste' },
   caller: {
@@ -263,7 +263,7 @@ export const ep04: Episode = {
           lines: [
             { speaker: 'rocky', text: { zh: '好好好。你声音，松回来一点了。', en: 'Good good good. Your voice, it loosened back a little.' } },
             { speaker: 'rocky', text: { zh: '去歇着。你维持的那个系统，今天运转得很好。包括你自己这一套。', en: 'Go rest. The system you keep, it ran well today. Including your own.' } },
-            { speaker: 'rocky', text: { zh: '线一直开着。下次娃睡了，还能打来。', en: 'The line stays open. Next time the kid sleeps, you can call.' } },
+            { speaker: 'rocky', text: { zh: '那根藏在墙里的梁，今晚也该卸一会儿载。明天再承重。', en: 'The beam inside the wall — tonight, set its load down a while too. Bear it again tomorrow.' } },
           ],
         },
         {

@@ -19,7 +19,7 @@ import type { Episode } from '../../engine/types';
 export const ep05: Episode = {
   id: 'ep05',
   order: 5,
-  title: { zh: '知识怎么活过一代人', en: 'How Knowledge Outlives a Generation' },
+  title: { zh: '最后一排', en: 'The Back Row' },
   subtitle: { zh: '顾岚 · 中学老师 / 倦怠', en: 'Gu Lan · middle-school teacher / burned out' },
   theme: { zh: '当你怀疑自己教的东西到底有没有用', en: 'When you wonder whether anything you teach actually matters' },
   caller: {
@@ -44,7 +44,7 @@ export const ep05: Episode = {
       kind: 'scene',
       next: 'connect',
       lines: [
-        { speaker: 'system', text: { zh: '〔星际通讯线 · ERID↔地球〕今晚第 31 通来电', en: '[INTERSTELLAR LINE · ERID↔EARTH] Call #31 tonight' }, stage: { zh: '信号建立中…', en: 'establishing link…' } },
+        { speaker: 'system', text: { zh: '〔星际通讯线 · ERID↔地球〕今晚第 23 通来电', en: '[INTERSTELLAR LINE · ERID↔EARTH] Call #23 tonight' }, stage: { zh: '信号建立中…', en: 'establishing link…' } },
         { speaker: 'narrator', text: { zh: '晚上十一点四十。教师宿舍的台灯下，一摞卷子刚批完。', en: '11:40 p.m. Under the desk lamp in the teachers’ dorm, the last stack of exams is finally marked.' } },
         { speaker: 'narrator', text: { zh: '红笔的墨快干了。最高分九十七，最低分三十一，中间是一长串你已经看了快二十年的数字。', en: 'The red pen is almost dry. Top score ninety-seven, bottom thirty-one, and in between a long run of numbers you’ve been reading for nearly twenty years.' } },
         { speaker: 'narrator', text: { zh: '今天教研会上，主任又说"现在谁还当老师啊"，说得像在安慰你，又像在提醒你。', en: 'At today’s faculty meeting the department head said it again — "who even goes into teaching anymore" — in a tone that was half comfort, half warning.' } },
@@ -301,7 +301,7 @@ export const ep05: Episode = {
           when: { type: 'signalAtLeast', value: 58 },
           lines: [
             { speaker: 'rocky', text: { zh: '好好好。你声音，不那么累了。机器没停，只是上了点油。', en: 'Good good good. Your voice — not so tired now. Machine did not stop. Just got a little oil.' } },
-            { speaker: 'rocky', text: { zh: '去睡，知识的飞船。线一直开着。格雷斯说，欢迎下次再来开同行会。', en: 'Go sleep, ship of knowledge. The line stays open. Grace says, come back anytime for another meeting of the trade.' } },
+            { speaker: 'rocky', text: { zh: '去睡，知识的飞船。明天那个最后一排的孩子，还等着上船。格雷斯说，同行会随时给你留位。', en: 'Go sleep, ship of knowledge. Tomorrow that kid in the back row is still waiting to board. Grace says he keeps a seat for you at the meeting of the trade, anytime.' } },
           ],
         },
         {

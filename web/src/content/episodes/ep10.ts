@@ -17,7 +17,7 @@ import type { Episode } from '../../engine/types';
 export const ep10: Episode = {
   id: 'ep10',
   order: 10,
-  title: { zh: '不表达，信息会死', en: 'Unsent, the Signal Dies' },
+  title: { zh: '播放量：9', en: 'Plays: 9' },
   subtitle: { zh: '夏鸣 · 独立音乐人 / 无人听', en: 'Xia Ming · indie musician / no one listening' },
   theme: {
     zh: '当你表达了很久，却好像没人在听',
@@ -45,8 +45,8 @@ export const ep10: Episode = {
       en: 'He was not suddenly "heard." But he finished the next song and sent it out — and this time he handed it, in person, to one specific person.',
     },
     morningBeat: {
-      zh: '夏鸣把那首没人听的歌，单独发给了楼下那个总在凌晨修吉他的大叔。附了一句："你帮我听听这段，行吗。"',
-      en: 'Xia Ming sent the song no one had listened to, just to the old guy downstairs who is always fixing guitars at 2 a.m. He added one line: "Give this part a listen for me, would you?"',
+      zh: '夏鸣把那首没人听的歌，单独发给了深夜便利店那个店员——上次结账时，那人说"你那首歌，我循环了一晚上"。他附了一句："你帮我听听这段，行吗。"',
+      en: 'Xia Ming sent the song no one had listened to, just to the clerk at the night-shift convenience store — the one who, ringing him up last time, had said, "That song of yours, I had it on loop all night." He added one line: "Give this part a listen for me, would you?"',
     },
     accent: 'violet',
   },
@@ -333,8 +333,8 @@ export const ep10: Episode = {
         {
           id: 'one_person',
           label: {
-            zh: '"……楼下那个大叔。他总在凌晨修吉他。有一次他隔着墙跟我哼了一句，调还挺准。"',
-            en: '"…The old guy downstairs. Always fixing guitars at 2 a.m. Once he hummed a line back at me through the wall — and his pitch was dead on."',
+            zh: '"……深夜便利店那个店员。有次结账，他跟我说『你那首歌，我循环了一晚上』。我愣在那儿，找钱都忘拿了。"',
+            en: '"…The clerk at the night-shift convenience store. One time, ringing me up, he said, \'That song of yours, I had it on loop all night.\' I just stood there — forgot to even take my change."',
           },
           effects: [{ type: 'signal', delta: 12 }, { type: 'flag', key: 'has_target', value: true }],
           next: 'gate_grace',
@@ -578,8 +578,8 @@ export const ep10: Episode = {
             {
               speaker: 'rocky',
               text: {
-                zh: '去睡。漏水的太空团子。线一直开着。我在这头收信号。',
-                en: 'Go sleep. Leaky little space blob. Line stays open. I receive signal on this end.',
+                zh: '去睡。今晚这段你，已经发出去了——我这头，收到了。明天，瞄准那一个会回信号的人，再发一次。',
+                en: 'Go sleep. Tonight\'s piece of you — it has been sent, and on this end, I received it. Tomorrow, aim at that one person who will signal back, and send it again.',
               },
             },
           ],

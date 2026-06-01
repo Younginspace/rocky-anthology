@@ -14,7 +14,7 @@ import type { Episode } from '../../engine/types';
 export const ep07: Episode = {
   id: 'ep07',
   order: 7,
-  title: { zh: '你不是你的职位', en: 'You Are Not Your Job Title' },
+  title: { zh: '坐到天黑', en: 'Until Dark' },
   subtitle: { zh: '韩冬 · 中年失业 / 程序员', en: 'Han Dong · laid off at midlife / programmer' },
   theme: {
     zh: '当机器把你会的那门手艺做了，而你以为那就是你',
@@ -75,7 +75,7 @@ export const ep07: Episode = {
       lines: [
         {
           speaker: 'system',
-          text: { zh: '〔星际通讯线 · ERID↔地球〕今晚第 9 通来电', en: '[INTERSTELLAR LINE · ERID↔EARTH] Call #9 tonight' },
+          text: { zh: '〔星际通讯线 · ERID↔地球〕今晚第 18 通来电', en: '[INTERSTELLAR LINE · ERID↔EARTH] Call #18 tonight' },
           stage: { zh: '信号建立中…', en: 'establishing link…' },
         },
         {
@@ -614,8 +614,8 @@ export const ep07: Episode = {
             {
               speaker: 'rocky',
               text: {
-                zh: '去睡，地球人。线一直开着。一根梁断，你不是整座桥。记住。',
-                en: 'Go sleep, Earth person. The line stays open. One beam breaks — you are not the whole bridge. Remember.',
+                zh: '去睡，地球人。明天别再坐到天黑了——回家，让别的梁分一点。一根梁断，你不是整座桥。记住。',
+                en: 'Go sleep, Earth person. Tomorrow, no more sitting until dark — go home, let the other beams take a share. One beam breaks — you are not the whole bridge. Remember.',
               },
             },
           ],

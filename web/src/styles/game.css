@@ -197,7 +197,12 @@ button { font-family: inherit; color: inherit; cursor: pointer; background: none
 .signal.steady i:nth-child(-n+2) { background: var(--astro); box-shadow: 0 0 6px var(--astro); }
 .signal.clear  i:nth-child(-n+3) { background: var(--rocky); box-shadow: 0 0 6px var(--rocky); }
 .signal.locked i { background: var(--rocky); box-shadow: 0 0 8px var(--rocky); }
-.signal-label { font-size: 9.5px; color: var(--text-dim); letter-spacing: .16em; }
+.signal-label { font-size: 9.5px; color: var(--text-dim); letter-spacing: .16em; transition: color .3s var(--ease-out); }
+/* connection-strengthened pulse */
+.signal.bump i { animation: sigbump .7s var(--ease-out); }
+.signal-label.bump { color: var(--rocky); }
+@keyframes sigbump { 0% { transform: scaleY(1); } 35% { transform: scaleY(1.6); } 100% { transform: scaleY(1); } }
+@media (prefers-reduced-motion: reduce) { .signal.bump i { animation: none; } }
 
 .lang-toggle {
   font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em;
@@ -499,3 +504,28 @@ button { font-family: inherit; color: inherit; cursor: pointer; background: none
   background: color-mix(in srgb, var(--accentc, var(--astro)) 10%, transparent);
   animation: blink 2.2s ease-in-out infinite;
 }
+
+/* ── Feedback ("letters to Rocky") ── */
+.fb-pad { padding: 30px 20px 44px; max-width: var(--read); margin: 0 auto; }
+.fb-intro { font-family: var(--font-serif); color: var(--text-secondary); font-size: 15px; line-height: 1.95; margin: 12px 0 28px; }
+.fb-block { margin-bottom: 26px; }
+.fb-q { display: block; font-family: var(--font-serif); font-size: 16.5px; color: var(--text-primary); margin-bottom: 10px; }
+.fb-select, .fb-text {
+  width: 100%; color: var(--text-primary);
+  background: var(--surface); border: 1px solid var(--hairline); border-radius: 12px;
+  padding: 12px 14px; transition: border-color .18s var(--ease-out), box-shadow .18s var(--ease-out);
+}
+.fb-select { font-family: var(--font-mono); font-size: 13px; }
+.fb-select option { background: #14100a; color: var(--text-primary); }
+.fb-text { font-family: var(--font-serif); font-size: 15px; resize: vertical; line-height: 1.85; margin-top: 10px; }
+.fb-select:focus, .fb-text:focus { outline: none; border-color: var(--astro); box-shadow: 0 0 0 1px var(--astro); }
+.fb-text::placeholder { color: var(--text-faint); }
+.fb-err { color: var(--astro-red); font-size: 13.5px; text-align: center; margin: 10px 0 0; }
+
+.fb-done { padding: 64px 24px; text-align: center; max-width: var(--read); margin: 0 auto; }
+.fb-done-kicker { font-family: var(--font-mono); color: var(--rocky); font-size: 11px; letter-spacing: .24em; }
+.fb-done-title { font-family: var(--font-serif); font-size: 28px; font-weight: 600; margin: 16px 0; }
+.fb-done-body { font-family: var(--font-serif); color: var(--text-secondary); font-size: 16px; line-height: 2.05; }
+.fb-done-count { color: var(--text-dim); font-size: 13.5px; margin-top: 18px; font-family: var(--font-serif); }
+.fb-sign { font-family: var(--font-mono); color: var(--text-dim); font-size: 12px; margin-top: 12px; letter-spacing: .06em; }
+.fb-sign b { color: var(--astro); }

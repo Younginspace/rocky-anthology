@@ -15,7 +15,7 @@ import type { Episode } from '../../engine/types';
 export const ep01: Episode = {
   id: 'ep01',
   order: 1,
-  title: { zh: '二战的夜', en: 'The Second-Run Night' },
+  title: { zh: '两点钟的汇率', en: 'The 2 A.M. Rate' },
   subtitle: { zh: '林晚 · 考研二战 / 考公', en: 'Lin Wan · second run at the grad-school exam' },
   theme: { zh: '当你怕自己的努力会被机器取代', en: 'When you fear a machine will replace everything you worked for' },
   caller: {

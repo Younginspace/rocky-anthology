@@ -20,7 +20,7 @@ import type { Episode } from '../../engine/types';
 export const ep08: Episode = {
   id: 'ep08',
   order: 8,
-  title: { zh: '你救了你能救的', en: 'You Saved Who You Could Save' },
+  title: { zh: '买瓶热的', en: 'Something Warm' },
   subtitle: { zh: '梅雨 · 急诊夜班护士 / 同情疲劳', en: 'Mei Yu · night-shift ER nurse / compassion fatigue' },
   theme: { zh: '当你见多了死亡，开始麻木，又为自己的麻木愧疚', en: 'When you have seen too much dying, go numb, and then feel guilty for going numb' },
   caller: {
@@ -45,7 +45,7 @@ export const ep08: Episode = {
       kind: 'scene',
       next: 'connect',
       lines: [
-        { speaker: 'system', text: { zh: '〔星际通讯线 · ERID↔地球〕今晚第 9 通来电', en: '[INTERSTELLAR LINE · ERID↔EARTH] Call #9 tonight' }, stage: { zh: '信号建立中…', en: 'establishing link…' } },
+        { speaker: 'system', text: { zh: '〔星际通讯线 · ERID↔地球〕今晚第 27 通来电', en: '[INTERSTELLAR LINE · ERID↔EARTH] Call #27 tonight' }, stage: { zh: '信号建立中…', en: 'establishing link…' } },
         { speaker: 'narrator', text: { zh: '凌晨四点。抢救室里灭了一盏灯。', en: 'Four in the morning. One light has gone out in the resus bay.' } },
         { speaker: 'narrator', text: { zh: '半小时前，主治医生看了一眼表，说了那句话。家属的哭声你已经分不清是哪一种了。', en: 'Half an hour ago the attending glanced at the clock and said the words. The family\'s crying — you can no longer tell one kind from another.' } },
         { speaker: 'narrator', text: { zh: '你回到更衣间，坐下。手机屏幕亮着，是收藏夹里一条很旧的链接——某个值大夜的晚上，谁随手转给你的。', en: 'You go back to the locker room and sit down. Your phone is lit on an old link buried in your bookmarks — someone forwarded it to you, offhand, on some long night shift.' } },
@@ -278,7 +278,7 @@ export const ep08: Episode = {
           when: { type: 'signalAtLeast', value: 58 },
           lines: [
             { speaker: 'rocky', text: { zh: '好好好。你声音，回来一点了。不那么平了。', en: 'Good good good. Your voice, coming back a little. Not so flat.' } },
-            { speaker: 'rocky', text: { zh: '去歇，会漏水的人类。线一直开着。下次累了，再拨。', en: 'Go rest, leaky human. The line stays open. Next time you are worn down, call.' } },
+            { speaker: 'rocky', text: { zh: '去歇，急诊的人类。系统降了功率，不是坏了——是它知道自己的额定载荷。下班路上，给自己买瓶热的。', en: 'Go rest, ER human. The system dropped its power — not broken. It knows its own rated load. On the way out, buy yourself something warm.' } },
             { speaker: 'narrator', text: { zh: '你笑了一下，眼睛却热了。原来，它还在。', en: 'You laugh a little, and your eyes go hot. So it was still there, after all.' } },
           ],
         },

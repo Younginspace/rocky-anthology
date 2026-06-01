@@ -8,7 +8,7 @@ import type { Progress } from './persistence';
  * component module keeps React Fast Refresh boundaries clean.
  */
 
-export type Screen = 'boot' | 'archive' | 'incall' | 'cards' | 'montage';
+export type Screen = 'boot' | 'archive' | 'incall' | 'cards' | 'montage' | 'feedback';
 
 export interface TranscriptItem {
   key: string;

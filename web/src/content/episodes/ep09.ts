@@ -16,7 +16,7 @@ import type { Episode } from '../../engine/types';
 export const ep09: Episode = {
   id: 'ep09',
   order: 9,
-  title: { zh: '结构造完了，还在承重', en: 'The Structure Is Finished. It Still Bears Load.' },
+  title: { zh: '那把二胡', en: 'The Erhu' },
   subtitle: { zh: '高建国 · 刚退休 / 失去"被需要"', en: 'Gao Jianguo · just retired / no longer needed' },
   theme: { zh: '当忙了一辈子的你，突然没人需要了', en: 'When you have been busy your whole life, and suddenly no one needs you' },
   caller: {
@@ -282,7 +282,7 @@ export const ep09: Episode = {
           lines: [
             { speaker: 'rocky', text: { zh: '好好好。你声音，垫起来了。后面那间空屋，进了点东西。', en: 'Good good good. Your voice — padded up now. The empty room behind it. Something moved in.' } },
             { speaker: 'rocky', text: { zh: '去歇着，老先生。你不是停机的废铁。你是底下那一层。', en: 'Go rest, old man. You are not stopped scrap iron. You are the layer underneath.' } },
-            { speaker: 'rocky', text: { zh: '线一直开着。哪天又静了，再打来。', en: 'The line stays open. Some night it goes quiet again, call back.' } },
+            { speaker: 'rocky', text: { zh: '你造完的那座桥，停工了，还在让人走。明天，把那把二胡也擦响。结构还站着呢。', en: 'The bridge you finished — work stopped, people still cross it. Tomorrow, wipe that erhu down and make it sound. The structure is still standing.' } },
           ],
         },
         {

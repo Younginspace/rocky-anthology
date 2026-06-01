@@ -10,6 +10,7 @@ import { CallArchive } from './components/CallArchive';
 import { InCall } from './components/InCall';
 import { CardCollection } from './components/CardCollection';
 import { MorningMontage } from './components/MorningMontage';
+import { FeedbackScreen } from './components/FeedbackScreen';
 import { CardToast } from './components/CardToast';
 
 class ErrorBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
@@ -44,6 +45,7 @@ function Screen() {
     case 'incall': return <InCall />;
     case 'cards': return <CardCollection />;
     case 'montage': return <MorningMontage />;
+    case 'feedback': return <FeedbackScreen />;
     default: return <CallArchive />;
   }
 }

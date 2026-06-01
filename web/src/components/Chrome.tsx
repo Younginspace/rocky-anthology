@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import { signalTier } from '../engine/engine';
 import { episodeById } from '../content';
 import { useGame } from '../state/gameContext';
@@ -18,8 +19,21 @@ export function StatusBar() {
   const t = UI[chromeLang(lang)];
   const inCall = screen === 'incall' && session;
   const ep = session ? episodeById[session.episodeId] : null;
-  const tier = session ? signalTier(session.state.signal) : null;
+  const signal = session?.state.signal ?? null;
+  const tier = signal != null ? signalTier(signal) : null;
   const showHome = screen !== 'boot' && screen !== 'archive';
+
+  // Pulse the signal bars when the connection strengthens — a quiet "that landed".
+  const prevSignal = useRef<number | null>(null);
+  const [bump, setBump] = useState(false);
+  useEffect(() => {
+    const prev = prevSignal.current;
+    prevSignal.current = signal;
+    if (prev == null || signal == null || signal <= prev) return;
+    setBump(true);
+    const id = setTimeout(() => setBump(false), 720);
+    return () => clearTimeout(id);
+  }, [signal]);
 
   return (
     <div className="statusbar" role="status">
@@ -38,8 +52,8 @@ export function StatusBar() {
       <div className="sb-right">
         {tier ? (
           <>
-            <span className="signal-label">{SIGNAL_LABEL[chromeLang(lang)][tier]}</span>
-            <span className={`signal ${tier}`} aria-label={SIGNAL_LABEL[chromeLang(lang)][tier]}>
+            <span className={`signal-label${bump ? ' bump' : ''}`}>{SIGNAL_LABEL[chromeLang(lang)][tier]}</span>
+            <span className={`signal ${tier}${bump ? ' bump' : ''}`} aria-label={SIGNAL_LABEL[chromeLang(lang)][tier]}>
               <i /><i /><i /><i />
             </span>
           </>

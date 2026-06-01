@@ -53,6 +53,29 @@ export function saveMode(mode: LangMode): void {
   try { localStorage.setItem(MODE_KEY, mode); } catch { /* ignore */ }
 }
 
+/** Anonymous per-browser id ("random account"), persisted. Used to tag feedback. */
+const UID_KEY = 'xct.uid';
+function randomUid(): string {
+  try {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
+  } catch { /* fall through */ }
+  return 'u-' + Math.random().toString(36).slice(2, 10) + Math.random().toString(36).slice(2, 6);
+}
+export function getUid(): string {
+  try {
+    let v = localStorage.getItem(UID_KEY);
+    if (!v) { v = randomUid(); localStorage.setItem(UID_KEY, v); }
+    return v;
+  } catch {
+    return randomUid();
+  }
+}
+/** A short, friendly call-sign derived from the uid (e.g. "LISTENER-7F3A"). */
+export function callSign(uid: string): string {
+  const hex = uid.replace(/[^a-zA-Z0-9]/g, '').slice(-4).toUpperCase().padStart(4, '0');
+  return `LISTENER-${hex}`;
+}
+
 export const emptyProgress = (): Progress => ({
   completedEpisodes: [],
   unlockedCards: [],

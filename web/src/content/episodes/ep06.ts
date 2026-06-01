@@ -15,7 +15,7 @@ import type { Episode } from '../../engine/types';
 export const ep06: Episode = {
   id: 'ep06',
   order: 6,
-  title: { zh: '失败的任务，不是失败的人', en: 'A Failed Mission Is Not a Failed Person' },
+  title: { zh: '死掉的多肉', en: 'The Dead Succulent' },
   subtitle: { zh: '江帆 · 创业失败 / 愧疚连累他人', en: 'Jiang Fan · a startup that died / the guilt of pulling others down with it' },
   theme: { zh: '当你的项目黄了，还把跟着你的人一起拖了下去', en: 'When your venture goes under — and takes everyone who believed in you down with it' },
   caller: {
@@ -40,7 +40,7 @@ export const ep06: Episode = {
       kind: 'scene',
       next: 'connect',
       lines: [
-        { speaker: 'system', text: { zh: '〔星际通讯线 · ERID↔地球〕今晚第 31 通来电', en: '[INTERSTELLAR LINE · ERID↔EARTH] Call #31 tonight' }, stage: { zh: '信号建立中…', en: 'establishing link…' } },
+        { speaker: 'system', text: { zh: '〔星际通讯线 · ERID↔地球〕今晚第 37 通来电', en: '[INTERSTELLAR LINE · ERID↔EARTH] Call #37 tonight' }, stage: { zh: '信号建立中…', en: 'establishing link…' } },
         { speaker: 'narrator', text: { zh: '凌晨三点。办公室搬空了一半。', en: '3 a.m. The office is half cleared out.' } },
         { speaker: 'narrator', text: { zh: '工位上还留着别人忘了拿走的马克杯，一盆死掉的多肉。墙上那张"还有 30 天上线"的倒计时，没人去撕。', en: "On a desk: a mug someone forgot to take, a dead succulent in its pot. The countdown taped to the wall — \"30 days to launch\" — and no one has torn it down." } },
         { speaker: 'narrator', text: { zh: '手机里，投资人的消息你没敢回。兄弟的工资还差两个月。家里以为你"在忙"。', en: 'On your phone, the investor\'s message you have not dared open. Your guys are still owed two months\' pay. Your family thinks you\'re just "busy."' } },
@@ -264,7 +264,7 @@ export const ep06: Episode = {
           lines: [
             { speaker: 'rocky', text: { zh: '好好好。你呼吸，不那么浅了。憋着的东西，松了一点。', en: 'Good good good. Your breathing — not so shallow now. The thing you held in, loosened a little.' } },
             { speaker: 'rocky', text: { zh: '去睡，朋友。22 个我背着，你的几个你背着。背得动的人，明天接着走。', en: 'Go sleep, friend. My 22 I carry, your few you carry. The one who can still carry it walks on tomorrow.' } },
-            { speaker: 'rocky', text: { zh: '线一直开着。我在这头。', en: 'The line stays open. I am on this end.' } },
+            { speaker: 'rocky', text: { zh: '那盆多肉，是上一版死了。不是你死了。下一版，换个浇水的量。', en: 'That succulent — it is the last version that died. Not you. Next version, change how much you water it.' } },
           ],
         },
         {

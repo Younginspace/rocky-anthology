@@ -4,7 +4,7 @@ import type { Episode } from '../../engine/types';
 export const ep02: Episode = {
   id: 'ep02',
   order: 2,
-  title: { zh: '发射前夜', en: 'The Night Before Launch' },
+  title: { zh: '凉掉的牛奶', en: 'The Milk Gone Cold' },
   subtitle: { zh: '陈乐 · 高考前一晚', en: 'Chen Le · the night before the gaokao' },
   theme: {
     zh: '当一场考试好像要决定你的一生',
@@ -434,7 +434,7 @@ export const ep02: Episode = {
             { speaker: 'rocky', text: { zh: '好好好。声音不抖了。准备好了。', en: 'Good good good. Voice not shaking now. Ready.' } },
             {
               speaker: 'rocky',
-              text: { zh: '去睡，漏水的太空团子。明天，发射。我在这头，听着。', en: 'Go sleep, leaky space blob. Tomorrow, launch. I am on this end, listening.' },
+              text: { zh: '去睡，漏水的太空团子。该做的检查，都做完了。明天，倒计时归零，发射。', en: 'Go sleep, leaky space blob. The checks that needed doing are done. Tomorrow, the countdown hits zero. Launch.' },
             },
           ],
         },
