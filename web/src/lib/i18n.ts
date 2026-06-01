@@ -17,7 +17,7 @@ export function nextMode(mode: LangMode): LangMode {
   return mode === 'both' ? 'zh' : mode === 'zh' ? 'en' : 'both';
 }
 
-export const MODE_LABEL: Record<LangMode, string> = { both: '中/EN', zh: '中', en: 'EN' };
+export const MODE_LABEL: Record<LangMode, string> = { both: '双语', zh: '中文', en: 'EN' };
 
 export const SPEAKER_LABEL: Record<Lang, Record<SpeakerId, string>> = {
   zh: { rocky: 'ROCKY', grace: 'GRACE', caller: '我', narrator: '', system: '' },

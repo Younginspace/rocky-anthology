@@ -6,6 +6,10 @@ import type { GameState, LangMode, LocalizedText } from '../engine/types';
  */
 const KEY = 'xct.save.v1';
 const VERSION = 1;
+/** Display-mode preference lives under its own key so it can default to
+ *  bilingual independently of the (older) save blob — returning players who
+ *  never explicitly chose a mode get the bilingual default. */
+const MODE_KEY = 'xct.mode.v1';
 
 export interface Progress {
   completedEpisodes: string[];
@@ -33,8 +37,20 @@ export interface SaveBlob {
   progress: Progress;
   /** The active in-call session, so a refresh resumes mid-conversation. */
   session: SavedSession | null;
-  /** Display-mode preference (bilingual / zh / en). */
-  lang: LangMode;
+}
+
+/** Display mode preference (own key; defaults to bilingual). */
+export function loadMode(): LangMode {
+  try {
+    const v = localStorage.getItem(MODE_KEY);
+    return v === 'zh' || v === 'en' || v === 'both' ? v : 'both';
+  } catch {
+    return 'both';
+  }
+}
+
+export function saveMode(mode: LangMode): void {
+  try { localStorage.setItem(MODE_KEY, mode); } catch { /* ignore */ }
 }
 
 export const emptyProgress = (): Progress => ({
@@ -91,7 +107,6 @@ export function load(): SaveBlob {
         bootSeen: !!p.bootSeen,
       },
       session: validateSession(parsed.session),
-      lang: parsed.lang === 'en' || parsed.lang === 'zh' ? parsed.lang : 'both',
     };
   } catch {
     return fresh();
@@ -111,5 +126,5 @@ export function wipe(): void {
 }
 
 function fresh(): SaveBlob {
-  return { version: VERSION, progress: emptyProgress(), session: null, lang: 'both' };
+  return { version: VERSION, progress: emptyProgress(), session: null };
 }

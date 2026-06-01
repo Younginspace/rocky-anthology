@@ -1,6 +1,6 @@
 import { Component, type ReactNode } from 'react';
 import './styles/game.css';
-import { load, wipe } from './state/persistence';
+import { loadMode, wipe } from './state/persistence';
 import { chromeLang, UI } from './lib/i18n';
 import { GameProvider } from './state/gameStore';
 import { useGame } from './state/gameContext';
@@ -18,7 +18,7 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { error: Error | 
   componentDidCatch(error: Error) { console.error('[app] render error:', error); }
   render() {
     if (this.state.error) {
-      const t = UI[chromeLang(load().lang)];
+      const t = UI[chromeLang(loadMode())];
       return (
         <div className="boot" style={{ height: '100dvh' }}>
           <div className="boot-inner">

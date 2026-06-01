@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import type { CurrentView, Episode, GameState, LocalizedText, SpeakerId } from '../engine/types';
 import { choose, continueScene, currentView, startEpisode } from '../engine/engine';
 import { cardById, episodeById, episodes } from '../content';
-import { load, save, type Progress } from './persistence';
+import { load, loadMode, save, saveMode, type Progress } from './persistence';
 import { GameCtx, type Action, type AppState, type Screen, type Session, type Store, type TranscriptItem } from './gameContext';
 
 function linesForView(view: CurrentView): { speaker: SpeakerId; text: LocalizedText; stage?: LocalizedText }[] {
@@ -160,7 +160,7 @@ function init(): AppState {
     }
   }
   if (!session && progress.bootSeen) screen = 'archive';
-  return { screen, progress, session, pendingCards: [], lang: blob.lang };
+  return { screen, progress, session, pendingCards: [], lang: loadMode() };
 }
 
 export function GameProvider({ children }: { children: ReactNode }) {
@@ -175,9 +175,11 @@ export function GameProvider({ children }: { children: ReactNode }) {
       session: state.session
         ? { episodeId: state.session.episodeId, state: state.session.state, transcript: state.session.transcript }
         : null,
-      lang: state.lang,
     });
-  }, [state.progress, state.session, state.lang]);
+  }, [state.progress, state.session]);
+
+  // Persist the display-mode preference under its own key.
+  useEffect(() => { saveMode(state.lang); }, [state.lang]);
 
   const value = useMemo<Store>(() => ({ ...state, dispatch }), [state]);
   return <GameCtx.Provider value={value}>{children}</GameCtx.Provider>;
