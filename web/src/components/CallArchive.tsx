@@ -1,4 +1,4 @@
-import { Suspense, lazy, useState } from 'react';
+import { useState } from 'react';
 import type { Episode } from '../engine/types';
 import { episodes, episodeById, TOTAL_CARDS } from '../content';
 import { useGame } from '../state/gameContext';
@@ -6,8 +6,6 @@ import { chromeLang, loc, UI } from '../lib/i18n';
 import { accentStyle, handleInitials } from '../lib/ui';
 import { ART, episodeScene } from '../lib/art';
 import { IncomingCall } from './IncomingCall';
-
-const RockyModel = lazy(() => import('./RockyModel'));
 
 export function CallArchive() {
   const { progress, dispatch, lang, session } = useGame();
@@ -37,9 +35,11 @@ export function CallArchive() {
   return (
     <div className="scroll">
       <div className="arch-head">
-        <Suspense fallback={<img className="rocky3d-fallback" src={ART.rockyListen} alt="Rocky" style={{ maxWidth: 300, margin: '0 auto', display: 'block' }} />}>
-          <RockyModel />
-        </Suspense>
+        {/* Hero: watercolor still of Rocky listening for the call.
+            TODO: swap this <img> for a <video> once the sd2 hero clip is ready. */}
+        <div className="arch-hero">
+          <img className="fadein" src={ART.rockyListen} alt="Rocky" />
+        </div>
         <div className="arch-kicker">{t.archiveKicker}</div>
         <h1 className="arch-title">{t.bootTitle}</h1>
         <p className="arch-desc">{t.archiveDesc}</p>
