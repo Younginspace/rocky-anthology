@@ -19,6 +19,9 @@ export type FlagValue = boolean | number | string;
 
 export type Lang = 'zh' | 'en';
 
+/** Display mode: bilingual (zh primary + en secondary), or single-language. */
+export type LangMode = 'both' | 'zh' | 'en';
+
 /**
  * A piece of player-facing text. During the zh→bilingual migration this is a
  * union: legacy plain strings still compile, and `loc()` resolves either form.

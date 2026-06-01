@@ -1,22 +1,26 @@
 import { useEffect, useRef, useState } from 'react';
-import type { Episode, Lang } from '../engine/types';
+import type { Episode, LangMode } from '../engine/types';
 import { currentView } from '../engine/engine';
 import { episodeById } from '../content';
 import { useGame, type TranscriptItem } from '../state/gameContext';
-import { loc, SPEAKER_LABEL, UI } from '../lib/i18n';
+import { chromeLang, loc, SPEAKER_LABEL, UI } from '../lib/i18n';
 import { accentStyle } from '../lib/ui';
+import { Bi } from './Bi';
 import { WisdomCardView } from './WisdomCardView';
 
 function prefersReducedMotion(): boolean {
   return typeof window !== 'undefined' && !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 }
 
-/** How long to dwell before revealing the next line — scales with length + speaker. */
-function lineDelay(item: TranscriptItem, lang: Lang): number {
-  const len = loc(item.text, lang).length;
-  const perChar = lang === 'zh' ? 32 : 15;
+/** Dwell before revealing the next line — scales with the (primary) text length. */
+function lineDelay(item: TranscriptItem, lang: LangMode): number {
+  const cl = chromeLang(lang);
+  const len = loc(item.text, cl).length;
+  const perChar = cl === 'zh' ? 30 : 14;
   const base = item.speaker === 'narrator' || item.speaker === 'system' ? 320 : 420;
-  return Math.min(1400, Math.max(460, base + len * perChar));
+  // Bilingual mode shows two lines, so allow a touch more dwell.
+  const mult = lang === 'both' ? 1.25 : 1;
+  return Math.min(1500, Math.max(460, (base + len * perChar) * mult));
 }
 
 function Wave() {
@@ -27,8 +31,8 @@ function Wave() {
   );
 }
 
-function Line({ item, lang }: { item: TranscriptItem; lang: Lang }) {
-  const label = SPEAKER_LABEL[lang][item.speaker];
+function Line({ item, lang }: { item: TranscriptItem; lang: LangMode }) {
+  const label = SPEAKER_LABEL[chromeLang(lang)][item.speaker];
   return (
     <div className={`line ${item.speaker}`}>
       {label && (
@@ -38,23 +42,23 @@ function Line({ item, lang }: { item: TranscriptItem; lang: Lang }) {
         </div>
       )}
       <div className="bubble">
-        {loc(item.text, lang)}
-        {item.stage && <span className="stage">{loc(item.stage, lang)}</span>}
+        <Bi text={item.text} />
+        {item.stage && <span className="stage">{loc(item.stage, chromeLang(lang))}</span>}
       </div>
     </div>
   );
 }
 
-function EndingPanel({ ep, lang }: { ep: Episode; lang: Lang }) {
+function EndingPanel({ ep, lang }: { ep: Episode; lang: LangMode }) {
   const { progress } = useGame();
-  const t = UI[lang];
+  const t = UI[chromeLang(lang)];
   const earned = ep.cards.filter((c) => progress.unlockedCards.includes(c.id));
   return (
     <div className="ending fadein" style={accentStyle(ep.caller.accent)}>
       <div className="end-kicker">{t.callEnded} · {ep.caller.handle}</div>
       <div className="outcome">
         <span className="lbl">{t.after}</span>
-        {loc(ep.caller.outcomeShort, lang)}
+        <Bi text={ep.caller.outcomeShort} />
       </div>
       {earned.length > 0 && (
         <div className="earned">
@@ -68,7 +72,7 @@ function EndingPanel({ ep, lang }: { ep: Episode; lang: Lang }) {
 
 export function InCall() {
   const { session, dispatch, lang } = useGame();
-  const t = UI[lang];
+  const t = UI[chromeLang(lang)];
   const scrollRef = useRef<HTMLDivElement>(null);
   const epRef = useRef<string | null>(null);
   const [revealed, setRevealed] = useState(0);
@@ -77,8 +81,6 @@ export function InCall() {
   const view = session && ep ? currentView(ep, session.state) : null;
   const transcript = session?.transcript ?? [];
 
-  // Reset the reveal baseline when the call (episode) changes: fresh calls
-  // animate from 0; a resumed call shows its transcript instantly.
   const episodeId = session?.episodeId;
   useEffect(() => {
     if (!session || epRef.current === session.episodeId) return;
@@ -86,7 +88,6 @@ export function InCall() {
     setRevealed(session.resumed ? session.transcript.length : 0);
   }, [episodeId, session]);
 
-  // Reveal new lines one at a time.
   useEffect(() => {
     if (revealed >= transcript.length) return;
     if (prefersReducedMotion()) { setRevealed(transcript.length); return; }
@@ -95,7 +96,6 @@ export function InCall() {
     return () => clearTimeout(id);
   }, [revealed, transcript, lang]);
 
-  // Keep the latest line in view.
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
@@ -120,7 +120,7 @@ export function InCall() {
       <div className="dock">
         {!fullyRevealed && (
           <div className="continue-row">
-            <button className="tap-hint" onClick={skip}>{lang === 'zh' ? '点击跳过 ▾' : 'tap to skip ▾'}</button>
+            <button className="tap-hint" onClick={skip}>{t.tapToSkip}</button>
           </div>
         )}
 
@@ -132,7 +132,7 @@ export function InCall() {
 
         {fullyRevealed && view.kind === 'choice' && (
           <div className="choices" style={accentStyle(ep.caller.accent)}>
-            {view.prompt && <div className="choice-prompt">{loc(view.prompt, lang)}</div>}
+            {view.prompt && <div className="choice-prompt"><Bi text={view.prompt} /></div>}
             {view.options.map((o, i) => (
               <button
                 className="choice"
@@ -141,7 +141,7 @@ export function InCall() {
                 onClick={() => dispatch({ type: 'CHOOSE', optionId: o.id })}
               >
                 <span className="ci">{String.fromCharCode(65 + i)}</span>
-                {loc(o.label, lang)}
+                <span className="choice-text"><Bi text={o.label} /></span>
               </button>
             ))}
           </div>

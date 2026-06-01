@@ -1,10 +1,10 @@
 import { episodes } from '../content';
 import { useGame } from '../state/gameContext';
-import { loc, UI } from '../lib/i18n';
+import { chromeLang, loc, UI } from '../lib/i18n';
 import { accentStyle } from '../lib/ui';
+import { Bi } from './Bi';
 
 function renderLine(line: string, key: number) {
-  // Replace the {ERID} token with a highlighted span.
   const parts = line.split('{ERID}');
   return (
     <span key={key} style={{ display: 'block' }}>
@@ -20,7 +20,8 @@ function renderLine(line: string, key: number) {
 
 export function MorningMontage() {
   const { progress, dispatch, lang } = useGame();
-  const t = UI[lang];
+  const cl = chromeLang(lang);
+  const t = UI[cl];
   const done = episodes.filter((e) => progress.completedEpisodes.includes(e.id));
 
   return (
@@ -34,8 +35,8 @@ export function MorningMontage() {
           <div className="m-beat" key={ep.id} style={{ animationDelay: `${i * 0.25 + 0.2}s`, ...accentStyle(ep.caller.accent) }}>
             <span className="m-dot" />
             <span style={{ flex: 1 }}>
-              <span className="m-who">{loc(ep.caller.realName, lang)} · {loc(ep.caller.tagline, lang)}</span>
-              <span className="m-text">{loc(ep.caller.morningBeat, lang)}</span>
+              <span className="m-who">{loc(ep.caller.realName, cl)} · {loc(ep.caller.tagline, cl)}</span>
+              <span className="m-text"><Bi text={ep.caller.morningBeat} /></span>
             </span>
           </div>
         ))}

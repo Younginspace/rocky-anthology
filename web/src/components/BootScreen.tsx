@@ -1,9 +1,9 @@
 import { useGame } from '../state/gameContext';
-import { UI } from '../lib/i18n';
+import { chromeLang, UI } from '../lib/i18n';
 
 export function BootScreen() {
   const { lang, dispatch } = useGame();
-  const t = UI[lang];
+  const t = UI[chromeLang(lang)];
   return (
     <div className="boot scroll">
       <div className="boot-inner">

@@ -1,11 +1,12 @@
 import { episodes, TOTAL_CARDS } from '../content';
 import { useGame } from '../state/gameContext';
-import { loc, UI } from '../lib/i18n';
+import { chromeLang, loc, UI } from '../lib/i18n';
 import { WisdomCardView } from './WisdomCardView';
 
 export function CardCollection() {
   const { progress, dispatch, lang } = useGame();
-  const t = UI[lang];
+  const cl = chromeLang(lang);
+  const t = UI[cl];
   const count = progress.unlockedCards.length;
 
   return (
@@ -25,7 +26,7 @@ export function CardCollection() {
           if (!anyUnlocked) return null;
           return (
             <div key={ep.id} style={{ marginBottom: 22 }}>
-              <h4 className="coll-ep">{String(ep.order).padStart(2, '0')} · {loc(ep.title, lang)}</h4>
+              <h4 className="coll-ep">{String(ep.order).padStart(2, '0')} · {loc(ep.title, cl)}</h4>
               {ep.cards.map((c) => (
                 <WisdomCardView card={c} key={c.id} locked={!progress.unlockedCards.includes(c.id)} />
               ))}

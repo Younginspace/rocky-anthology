@@ -1,4 +1,4 @@
-import type { Lang, LocalizedText, SignalTier, SpeakerId } from '../engine/types';
+import type { Lang, LangMode, LocalizedText, SignalTier, SpeakerId } from '../engine/types';
 
 /** Resolve a LocalizedText (legacy string or { zh, en }) for the active language. */
 export function loc(text: LocalizedText | undefined, lang: Lang): string {
@@ -6,6 +6,18 @@ export function loc(text: LocalizedText | undefined, lang: Lang): string {
   if (typeof text === 'string') return text;
   return text[lang] ?? text.zh ?? text.en ?? '';
 }
+
+/** UI chrome is shown in a single language; bilingual mode uses zh chrome. */
+export function chromeLang(mode: LangMode): Lang {
+  return mode === 'en' ? 'en' : 'zh';
+}
+
+/** Toggle order: 双语 → 中 → EN → 双语. */
+export function nextMode(mode: LangMode): LangMode {
+  return mode === 'both' ? 'zh' : mode === 'zh' ? 'en' : 'both';
+}
+
+export const MODE_LABEL: Record<LangMode, string> = { both: '中/EN', zh: '中', en: 'EN' };
 
 export const SPEAKER_LABEL: Record<Lang, Record<SpeakerId, string>> = {
   zh: { rocky: 'ROCKY', grace: 'GRACE', caller: '我', narrator: '', system: '' },
@@ -23,6 +35,10 @@ export const UI = {
     lineName: 'ERID ↔ 地球 · 星际通讯线',
     delay: '延迟 4.2s',
     inCall: '通话中',
+    home: '档案',
+    langToggleAria: '切换显示语言（双语 / 中 / EN）',
+    resumeCall: '继续通话',
+    inCallBadge: '通话中',
     // boot
     bootTitle: '星际长途',
     bootSub: 'Long Distance, Across the Stars',
@@ -56,6 +72,7 @@ export const UI = {
     answer: '接听 ●',
     // in-call
     continueBtn: '继续 ▾',
+    tapToSkip: '点击跳过 ▾',
     callEnded: '通话结束',
     after: '后来',
     earnedCards: '本通获得的星语卡',
@@ -87,6 +104,10 @@ export const UI = {
     lineName: 'ERID ↔ EARTH · INTERSTELLAR LINE',
     delay: 'DELAY 4.2s',
     inCall: 'IN CALL',
+    home: 'Archive',
+    langToggleAria: 'Switch display language (中/EN / 中 / EN)',
+    resumeCall: 'Resume call',
+    inCallBadge: 'IN CALL',
     bootTitle: 'Long Distance',
     bootSub: '星际长途 · Across the Stars',
     bootTag: 'A Project Hail Mary fan story. You dial up Rocky — the Eridian engineer living on Erid. On this end of the line: ordinary people on Earth, awake too late.',
@@ -116,6 +137,7 @@ export const UI = {
     later: 'Later',
     answer: 'Answer ●',
     continueBtn: 'Continue ▾',
+    tapToSkip: 'tap to skip ▾',
     callEnded: 'CALL ENDED',
     after: 'After',
     earnedCards: 'Wisdom unlocked this call',

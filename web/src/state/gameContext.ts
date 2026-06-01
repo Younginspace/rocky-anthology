@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import type { GameState, Lang, LocalizedText, SpeakerId } from '../engine/types';
+import type { GameState, LangMode, LocalizedText, SpeakerId } from '../engine/types';
 import type { Progress } from './persistence';
 
 /**
@@ -32,8 +32,8 @@ export interface AppState {
   session: Session | null;
   /** Cards unlocked by the most recent step, surfaced as a toast. */
   pendingCards: string[];
-  /** Active display language. */
-  lang: Lang;
+  /** Active display mode (bilingual / zh / en). */
+  lang: LangMode;
 }
 
 export type Action =
@@ -45,7 +45,7 @@ export type Action =
   | { type: 'FINISH_CALL' }
   | { type: 'MONTAGE_DONE' }
   | { type: 'DISMISS_CARDS' }
-  | { type: 'SET_LANG'; lang: Lang }
+  | { type: 'SET_LANG'; lang: LangMode }
   | { type: 'RESET' };
 
 export interface Store extends AppState {

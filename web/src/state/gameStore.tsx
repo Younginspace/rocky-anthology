@@ -61,6 +61,11 @@ function reducer(state: AppState, action: Action): AppState {
       return { ...state, screen: 'archive', progress: { ...state.progress, bootSeen: true } };
 
     case 'GO':
+      // Leaving an active call to the archive: mark the session "resumed" so
+      // re-entering shows the existing transcript instantly (no re-animation).
+      if (action.screen === 'archive' && state.session) {
+        return { ...state, screen: 'archive', session: { ...state.session, resumed: true } };
+      }
       return { ...state, screen: action.screen };
 
     case 'START': {

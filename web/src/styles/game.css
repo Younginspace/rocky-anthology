@@ -456,3 +456,46 @@ button { font-family: inherit; color: inherit; cursor: pointer; background: none
 
 .center { text-align: center; }
 .fadein { animation: lineIn .55s var(--ease-out); }
+
+/* ── Bilingual (中英对照): English as a smaller, dimmer line beneath ── */
+.bi-en {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.8em;
+  line-height: 1.65;
+  opacity: 0.58;
+  letter-spacing: 0;
+}
+.line.narrator .bi-en { font-style: italic; }
+.choice .bi-en { opacity: 0.5; }
+.wcard .bi-en { opacity: 0.55; }
+.toast .bi-en { margin-top: 4px; }
+
+/* ── Home / back button (status bar) ── */
+.home-btn {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em;
+  color: var(--text-secondary); padding: 4px 8px 4px 0;
+  transition: color .16s var(--ease-out), transform .14s var(--ease-out);
+}
+.home-btn:hover { color: var(--astro); }
+.home-btn:active { transform: scale(0.95); }
+
+/* ── Resume-call bar (archive) ── */
+.resume-bar {
+  display: inline-flex; align-items: center; gap: 9px; margin-top: 18px;
+  font-family: var(--font-mono); font-size: 12.5px; letter-spacing: .03em;
+  color: var(--accentc, var(--astro)); border: 1px solid var(--accentc, var(--astro));
+  background: color-mix(in srgb, var(--accentc, var(--astro)) 10%, transparent);
+  padding: 10px 18px; border-radius: 999px;
+  transition: background .18s var(--ease-out), box-shadow .18s var(--ease-out), transform .16s var(--ease-out);
+}
+.resume-bar:hover { background: color-mix(in srgb, var(--accentc, var(--astro)) 20%, transparent); box-shadow: 0 0 24px -6px var(--accentc, var(--astro)); }
+.resume-bar:active { transform: scale(0.98); }
+.resume-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accentc, var(--astro)); box-shadow: 0 0 9px var(--accentc, var(--astro)); animation: blink 1.8s ease-in-out infinite; }
+
+.badge.active {
+  color: var(--accentc, var(--astro));
+  border: 1px solid var(--accentc, var(--astro));
+  background: color-mix(in srgb, var(--accentc, var(--astro)) 10%, transparent);
+  animation: blink 2.2s ease-in-out infinite;
+}

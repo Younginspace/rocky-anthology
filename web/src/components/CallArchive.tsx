@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import type { Episode } from '../engine/types';
-import { episodes, TOTAL_CARDS } from '../content';
+import { episodes, episodeById, TOTAL_CARDS } from '../content';
 import { useGame } from '../state/gameContext';
-import { loc, UI } from '../lib/i18n';
+import { chromeLang, loc, UI } from '../lib/i18n';
 import { accentStyle, handleInitials } from '../lib/ui';
 import { IncomingCall } from './IncomingCall';
 
 export function CallArchive() {
-  const { progress, dispatch, lang } = useGame();
-  const t = UI[lang];
+  const { progress, dispatch, lang, session } = useGame();
+  const cl = chromeLang(lang);
+  const t = UI[cl];
   const [incoming, setIncoming] = useState<Episode | null>(null);
 
   if (incoming) {
@@ -26,6 +27,9 @@ export function CallArchive() {
   const cardCount = progress.unlockedCards.length;
   const allDone = episodes.every((e) => completedSet.has(e.id));
 
+  // An active in-call session that the player navigated away from.
+  const activeEp = session && !completedSet.has(session.episodeId) ? episodeById[session.episodeId] : null;
+
   return (
     <div className="scroll">
       <div className="arch-head">
@@ -40,27 +44,36 @@ export function CallArchive() {
             <button className="linkish" onClick={() => dispatch({ type: 'GO', screen: 'montage' })}>{t.openMontage}</button>
           )}
         </div>
+        {activeEp && (
+          <button className="resume-bar" style={accentStyle(activeEp.caller.accent)} onClick={() => dispatch({ type: 'GO', screen: 'incall' })}>
+            <span className="resume-dot" />
+            ▸ {t.resumeCall} · {loc(activeEp.caller.realName, cl)}
+          </button>
+        )}
       </div>
 
       <div className="calls">
         {episodes.map((ep) => {
           const done = completedSet.has(ep.id);
+          const active = activeEp?.id === ep.id;
           return (
             <button
               className="call"
               key={ep.id}
               style={accentStyle(ep.caller.accent)}
-              onClick={() => setIncoming(ep)}
+              onClick={() => (active ? dispatch({ type: 'GO', screen: 'incall' }) : setIncoming(ep))}
             >
               <span className="idx">{String(ep.order).padStart(2, '0')}</span>
               <span className="avatar">{handleInitials(ep.caller.handle)}</span>
               <span className="body">
-                <span className="ep-title">{loc(ep.title, lang)}</span>
-                <span className="ep-sub">{loc(ep.caller.realName, lang)} · {loc(ep.caller.tagline, lang)}</span>
-                <span className="ep-theme">{done ? `${t.afterPrefix}${loc(ep.caller.outcomeShort, lang)}` : loc(ep.theme, lang)}</span>
+                <span className="ep-title">{loc(ep.title, cl)}</span>
+                <span className="ep-sub">{loc(ep.caller.realName, cl)} · {loc(ep.caller.tagline, cl)}</span>
+                <span className="ep-theme">{done ? `${t.afterPrefix}${loc(ep.caller.outcomeShort, cl)}` : loc(ep.theme, cl)}</span>
               </span>
               <span className="ep-status">
-                <span className={`badge ${done ? 'done' : 'new'}`}>{done ? t.answered : t.missed}</span>
+                <span className={`badge ${active ? 'active' : done ? 'done' : 'new'}`}>
+                  {active ? t.inCallBadge : done ? t.answered : t.missed}
+                </span>
                 <span className="cards-mini">
                   {ep.cards.map((c) => (
                     <i key={c.id} className={progress.unlockedCards.includes(c.id) ? 'on' : ''} aria-hidden />

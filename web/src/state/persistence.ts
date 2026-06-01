@@ -1,4 +1,4 @@
-import type { GameState, Lang, LocalizedText } from '../engine/types';
+import type { GameState, LangMode, LocalizedText } from '../engine/types';
 
 /**
  * Versioned localStorage persistence. If the schema version changes or the
@@ -33,8 +33,8 @@ export interface SaveBlob {
   progress: Progress;
   /** The active in-call session, so a refresh resumes mid-conversation. */
   session: SavedSession | null;
-  /** Display-language preference. */
-  lang: Lang;
+  /** Display-mode preference (bilingual / zh / en). */
+  lang: LangMode;
 }
 
 export const emptyProgress = (): Progress => ({
@@ -91,7 +91,7 @@ export function load(): SaveBlob {
         bootSeen: !!p.bootSeen,
       },
       session: validateSession(parsed.session),
-      lang: parsed.lang === 'en' ? 'en' : 'zh',
+      lang: parsed.lang === 'en' || parsed.lang === 'zh' ? parsed.lang : 'both',
     };
   } catch {
     return fresh();
@@ -111,5 +111,5 @@ export function wipe(): void {
 }
 
 function fresh(): SaveBlob {
-  return { version: VERSION, progress: emptyProgress(), session: null, lang: 'zh' };
+  return { version: VERSION, progress: emptyProgress(), session: null, lang: 'both' };
 }
