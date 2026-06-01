@@ -2,7 +2,9 @@ import type { Episode } from '../engine/types';
 import { useGame } from '../state/gameContext';
 import { chromeLang, loc, UI } from '../lib/i18n';
 import { accentStyle, handleInitials } from '../lib/ui';
+import { episodeScene } from '../lib/art';
 import { Bi } from './Bi';
+import { SceneArt } from './SceneArt';
 
 export function IncomingCall({
   ep,
@@ -20,9 +22,10 @@ export function IncomingCall({
   return (
     <div className="incoming scroll fadein" style={accentStyle(c.accent)}>
       <div className="incoming-inner">
+        <SceneArt src={episodeScene(ep.id)} loop />
         <div className="ring-pulse">
           <div className="halo" /><div className="halo" /><div className="halo" />
-          <div className="core">{handleInitials(c.handle)}</div>
+          <div className="core img" style={{ backgroundImage: `url(${episodeScene(ep.id)})` }}>{handleInitials(c.handle)}</div>
         </div>
         <div className="who-kicker">{t.incomingKicker}</div>
         <div className="who-name">{loc(c.realName, cl)}</div>

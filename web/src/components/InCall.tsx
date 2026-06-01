@@ -5,7 +5,9 @@ import { episodeById } from '../content';
 import { useGame, type TranscriptItem } from '../state/gameContext';
 import { chromeLang, loc, SPEAKER_LABEL, UI } from '../lib/i18n';
 import { accentStyle } from '../lib/ui';
+import { episodeScene } from '../lib/art';
 import { Bi } from './Bi';
+import { SceneArt } from './SceneArt';
 import { WisdomCardView } from './WisdomCardView';
 
 function prefersReducedMotion(): boolean {
@@ -112,6 +114,7 @@ export function InCall() {
     <div className="incall">
       <div className="scroll pad" ref={scrollRef} onClick={skip}>
         <div className="tx-area" aria-live="polite" aria-relevant="additions">
+          <SceneArt src={episodeScene(ep.id)} className="incall-art" />
           {shown.map((item) => <Line item={item} key={item.key} lang={lang} />)}
           {fullyRevealed && view.kind === 'ending' && <EndingPanel ep={ep} lang={lang} />}
         </div>

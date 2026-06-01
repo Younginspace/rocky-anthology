@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { Suspense, lazy, useState } from 'react';
 import type { Episode } from '../engine/types';
 import { episodes, episodeById, TOTAL_CARDS } from '../content';
 import { useGame } from '../state/gameContext';
 import { chromeLang, loc, UI } from '../lib/i18n';
 import { accentStyle, handleInitials } from '../lib/ui';
+import { ART, episodeScene } from '../lib/art';
 import { IncomingCall } from './IncomingCall';
+
+const RockyModel = lazy(() => import('./RockyModel'));
 
 export function CallArchive() {
   const { progress, dispatch, lang, session } = useGame();
@@ -34,6 +37,9 @@ export function CallArchive() {
   return (
     <div className="scroll">
       <div className="arch-head">
+        <Suspense fallback={<img className="rocky3d-fallback" src={ART.rockyListen} alt="Rocky" style={{ maxWidth: 300, margin: '0 auto', display: 'block' }} />}>
+          <RockyModel />
+        </Suspense>
         <div className="arch-kicker">{t.archiveKicker}</div>
         <h1 className="arch-title">{t.bootTitle}</h1>
         <p className="arch-desc">{t.archiveDesc}</p>
@@ -66,7 +72,7 @@ export function CallArchive() {
               onClick={() => (active ? dispatch({ type: 'GO', screen: 'incall' }) : setIncoming(ep))}
             >
               <span className="idx">{String(ep.order).padStart(2, '0')}</span>
-              <span className="avatar">{handleInitials(ep.caller.handle)}</span>
+              <span className="avatar img" style={{ backgroundImage: `url(${episodeScene(ep.id)})` }}>{handleInitials(ep.caller.handle)}</span>
               <span className="body">
                 <span className="ep-title">{loc(ep.title, cl)}</span>
                 <span className="ep-sub">{loc(ep.caller.realName, cl)} · {loc(ep.caller.tagline, cl)}</span>

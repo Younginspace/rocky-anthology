@@ -2,7 +2,9 @@ import { episodes } from '../content';
 import { useGame } from '../state/gameContext';
 import { chromeLang, loc, UI } from '../lib/i18n';
 import { accentStyle } from '../lib/ui';
+import { ART } from '../lib/art';
 import { Bi } from './Bi';
+import { SceneArt } from './SceneArt';
 
 function renderLine(line: string, key: number) {
   const parts = line.split('{ERID}');
@@ -27,6 +29,7 @@ export function MorningMontage() {
   return (
     <div className="scroll montage">
       <div className="m-pad">
+        <SceneArt src={ART.eridSky} loop />
         <div className="m-kicker">{t.montageKicker}</div>
         <h1 className="m-title">{t.montageTitle}</h1>
         <p className="m-dawn">{t.montageDawn.split('\n').map((s, i) => <span key={i} style={{ display: 'block' }}>{s}</span>)}</p>
