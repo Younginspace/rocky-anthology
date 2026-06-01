@@ -67,7 +67,7 @@
   --text-faint: #4e4034;
 
   --font-serif: 'Songti SC', 'Noto Serif CJK SC', 'Source Han Serif SC', 'STSong', Georgia, 'Times New Roman', 'SimSun', serif;
-  --font-mono: 'JetBrains Mono', 'Songti SC', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
@@ -136,8 +136,10 @@ button { font-family: inherit; color: inherit; cursor: pointer; background: none
   position: fixed; inset: -150%; z-index: 40; pointer-events: none;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   opacity: .05; mix-blend-mode: overlay;
-  animation: grain 0.6s steps(3) infinite;
   will-change: transform;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .grain { animation: grain 0.9s steps(2) infinite; }
 }
 @keyframes grain {
   0% { transform: translate(0, 0); }
@@ -148,7 +150,7 @@ button { font-family: inherit; color: inherit; cursor: pointer; background: none
 
 .vignette {
   position: fixed; inset: 0; z-index: 41; pointer-events: none;
-  box-shadow: inset 0 0 240px 50px #000b, inset 0 0 70px 0 #0007;
+  box-shadow: inset 0 0 min(240px, 32vw) 50px #000b, inset 0 0 70px 0 #0007;
 }
 
 /* ── App shell ── */
@@ -157,6 +159,14 @@ button { font-family: inherit; color: inherit; cursor: pointer; background: none
   height: 100dvh; width: 100%;
   display: flex; flex-direction: column;
   max-width: var(--maxw); margin: 0 auto;
+}
+/* On large screens, frame the column as a deliberate transmission terminal
+   rather than a centered mobile div on a black void. */
+@media (min-width: 820px) {
+  .shell {
+    border-inline: 1px solid var(--hairline-soft);
+    box-shadow: 0 0 140px -24px #000, inset 0 0 0 1px #ffffff05;
+  }
 }
 
 /* ── Status bar (mono chrome) ── */
@@ -276,7 +286,7 @@ button { font-family: inherit; color: inherit; cursor: pointer; background: none
   box-shadow: 0 0 16px -3px var(--accentc, var(--astro));
 }
 
-.fan-note { color: var(--text-faint); font-size: 12px; line-height: 1.9; max-width: 460px; margin: 0 auto; }
+.fan-note { color: var(--text-dim); font-size: 12px; line-height: 1.9; max-width: 460px; margin: 0 auto; }
 .linkish { font-family: var(--font-mono); color: var(--text-dim); text-decoration: none; border-bottom: 1px solid var(--hairline); font-size: 11.5px; transition: color .16s var(--ease-out), border-color .16s var(--ease-out); }
 .linkish:hover { color: var(--astro); border-color: var(--astro); }
 
@@ -419,7 +429,7 @@ button { font-family: inherit; color: inherit; cursor: pointer; background: none
 .wcard .wc-by.rocky { color: var(--rocky); }
 .wcard .wc-by.grace { color: var(--grace); }
 .wcard.locked { border-style: dashed; border-color: var(--text-faint); background: #0f0b07; }
-.wcard.locked .wc-text { color: var(--text-faint); font-style: italic; }
+.wcard.locked .wc-text { color: var(--text-dim); font-style: italic; }
 
 /* ============================================================
    CARD COLLECTION

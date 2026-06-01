@@ -50,6 +50,7 @@ export const UI = {
     confirmClear: '确定要清除所有进度吗？',
     // incoming
     incomingKicker: '来电接入 · INCOMING',
+    agePrefix: '',
     ageSuffix: ' 岁 · ',
     later: '稍后',
     answer: '接听 ●',
@@ -110,6 +111,7 @@ export const UI = {
     clearProgress: 'Clear progress',
     confirmClear: 'Clear all progress?',
     incomingKicker: 'INCOMING',
+    agePrefix: 'Age ',
     ageSuffix: ' · ',
     later: 'Later',
     answer: 'Answer ●',

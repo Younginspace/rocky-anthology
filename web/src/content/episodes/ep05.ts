@@ -31,7 +31,7 @@ export const ep05: Episode = {
     tagline: { zh: '教了快二十年书，热情快被磨光了', en: 'Almost twenty years of teaching, and the spark is nearly worn through' },
     reason: { zh: '深夜，又改完一摞卷子。她盯着满分和零分中间那一长串数字，突然不知道这些到底改变了什么。', en: 'Late at night, another stack of exams marked. She stares at the long run of numbers between top score and zero, and suddenly has no idea what any of it ever changed.' },
     outcomeShort: { zh: '她没有立刻找回热情。但第二天，她对一个总坐最后一排的孩子，做了一件不为分数的小事。', en: 'She did not get the fire back overnight. But the next day, for the kid who always sits in the back row, she did one small thing that had nothing to do with grades.' },
-    morningBeat: { zh: '顾岚走进教室，没急着讲题。她叫了那个总坐最后一排的孩子的名字——这次，她记得这个名字背后的事。', en: 'Gu Lan walks into the classroom and, for once, doesn’t rush into the lesson. She says the name of the kid in the back row — and this time, she remembers the story behind it.' },
+    morningBeat: { zh: '顾岚走进教室，没急着讲题。她叫了那个总坐最后一排的孩子的名字——这次，她记得这个名字背后的事。', en: 'Gu Lan walks into the classroom and, for once, doesn’t rush into the lesson. She says the name of the kid in the back row — and this time, she remembers the story behind that name.' },
     accent: 'gold',
   },
   cards: [

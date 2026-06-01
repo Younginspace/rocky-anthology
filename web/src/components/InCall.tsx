@@ -16,7 +16,7 @@ function lineDelay(item: TranscriptItem, lang: Lang): number {
   const len = loc(item.text, lang).length;
   const perChar = lang === 'zh' ? 32 : 15;
   const base = item.speaker === 'narrator' || item.speaker === 'system' ? 320 : 420;
-  return Math.min(1700, Math.max(480, base + len * perChar));
+  return Math.min(1400, Math.max(460, base + len * perChar));
 }
 
 function Wave() {

@@ -25,7 +25,7 @@ export function IncomingCall({
         <div className="who-kicker">{t.incomingKicker}</div>
         <div className="who-name">{loc(c.realName, lang)}</div>
         <div className="who-line">{loc(c.tagline, lang)}</div>
-        <div className="who-meta">{c.age}{t.ageSuffix}{loc(c.location, lang)}</div>
+        <div className="who-meta">{t.agePrefix}{c.age}{t.ageSuffix}{loc(c.location, lang)}</div>
         <p className="reason">{loc(c.reason, lang)}</p>
         <div className="actions">
           <button className="btn ghost" onClick={onDismiss}>{t.later}</button>
