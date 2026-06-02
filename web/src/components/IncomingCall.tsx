@@ -20,22 +20,24 @@ export function IncomingCall({
   const t = UI[cl];
   const c = ep.caller;
   return (
-    <div className="incoming scroll fadein" style={accentStyle(c.accent)}>
-      <div className="incoming-inner">
-        <SceneArt src={episodeScene(ep.id)} loop />
-        <div className="ring-pulse">
-          <div className="halo" /><div className="halo" /><div className="halo" />
-          <div className="core img" style={{ backgroundImage: `url(${episodeScene(ep.id)})` }}>{handleInitials(c.handle)}</div>
+    <div className="incoming fadein" style={accentStyle(c.accent)}>
+      <div className="scroll incoming-scroll">
+        <div className="incoming-inner">
+          <SceneArt src={episodeScene(ep.id)} loop />
+          <div className="ring-pulse">
+            <div className="halo" /><div className="halo" /><div className="halo" />
+            <div className="core img" style={{ backgroundImage: `url(${episodeScene(ep.id)})` }}>{handleInitials(c.handle)}</div>
+          </div>
+          <div className="who-kicker">{t.incomingKicker}</div>
+          <div className="who-name">{loc(c.realName, cl)}</div>
+          <div className="who-line">{loc(c.tagline, cl)}</div>
+          <div className="who-meta">{t.agePrefix}{c.age}{t.ageSuffix}{loc(c.location, cl)}</div>
+          <p className="reason"><Bi text={c.reason} /></p>
         </div>
-        <div className="who-kicker">{t.incomingKicker}</div>
-        <div className="who-name">{loc(c.realName, cl)}</div>
-        <div className="who-line">{loc(c.tagline, cl)}</div>
-        <div className="who-meta">{t.agePrefix}{c.age}{t.ageSuffix}{loc(c.location, cl)}</div>
-        <p className="reason"><Bi text={c.reason} /></p>
-        <div className="actions">
-          <button className="btn ghost" onClick={onDismiss}>{t.later}</button>
-          <button className="btn" onClick={onAnswer}>{t.answer}</button>
-        </div>
+      </div>
+      <div className="actions">
+        <button className="btn ghost" onClick={onDismiss}>{t.later}</button>
+        <button className="btn" onClick={onAnswer}>{t.answer}</button>
       </div>
     </div>
   );
