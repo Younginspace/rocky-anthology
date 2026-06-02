@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>Rocky 形态确认稿</title>
+<style>
+  @font-face { font-family:'Patrick Hand'; src:url('/fonts/PatrickHand-Regular.ttf') format('truetype'); font-display:swap; }
+  :root{ --paper:#f3ead8; --ink:#5b4a36; --teal:#2f9d8d; --amber:#d2853a; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{ background:var(--paper); color:var(--ink); font-family:'Songti SC','Noto Serif CJK SC',Georgia,serif; line-height:1.8; padding:24px 16px 60px; }
+  .wrap{ max-width:760px; margin:0 auto; }
+  h1{ font-family:'Patrick Hand',cursive; font-size:26px; letter-spacing:.04em; text-align:center; color:#3c3328; }
+  .sub{ text-align:center; color:#9c8d76; font-family:'Patrick Hand',cursive; font-size:15px; margin:4px 0 18px; }
+  .card{ background:#fbf5e9; border:1.5px solid #d8c6a8; border-radius:18px; padding:8px; box-shadow:0 10px 30px -18px #00000033; }
+  svg{ display:block; width:100%; height:auto; }
+  .checklist{ background:#fbf5e9; border:1.5px solid #d8c6a8; border-radius:16px; padding:18px 22px; margin-top:20px; }
+  .checklist h2{ font-family:'Patrick Hand',cursive; font-size:18px; color:var(--teal); margin-bottom:10px; }
+  .checklist li{ margin:6px 0 6px 4px; list-style:none; font-size:15.5px; }
+  .checklist li b{ color:var(--amber); font-weight:400; }
+  .note{ color:#6e6151; font-size:14.5px; margin-top:18px; text-align:center; line-height:2; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>ROCKY — 形态确认稿</h1>
+  <div class="sub">character spec · 确认形态对不对，再去生水彩成品</div>
+
+  <div class="card">
+  <svg viewBox="0 0 920 770" role="img" aria-label="Rocky 形态线稿">
+    <defs>
+      <radialGradient id="rock" cx="42%" cy="36%" r="72%">
+        <stop offset="0%" stop-color="#cabb9f"/>
+        <stop offset="62%" stop-color="#ad9a7c"/>
+        <stop offset="100%" stop-color="#8d7a5f"/>
+      </radialGradient>
+      <radialGradient id="bg" cx="50%" cy="30%" r="90%">
+        <stop offset="0%" stop-color="#f8f0df"/>
+        <stop offset="100%" stop-color="#efe2c6"/>
+      </radialGradient>
+      <filter id="soft"><feGaussianBlur stdDeviation="6"/></filter>
+      <filter id="glow"><feGaussianBlur stdDeviation="3"/></filter>
+    </defs>
+
+    <rect x="0" y="0" width="920" height="770" rx="14" fill="url(#bg)"/>
+    <ellipse cx="430" cy="650" rx="248" ry="34" fill="#8d7a5f" opacity="0.18" filter="url(#soft)"/>
+
+    <!-- ===== leg 3: back-center (behind body; only lower half shows) ===== -->
+    <g stroke="#5b4a36" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M404,452 q-12,96 -8,168 l56,0 q8,-78 -4,-170 z" fill="#8a7a5e"/>
+      <g fill="none" stroke-width="4.5"><path d="M406,612 l-3,26"/><path d="M430,616 l0,26"/><path d="M454,612 l3,26"/></g>
+    </g>
+
+    <!-- ===== body ===== -->
+    <ellipse cx="430" cy="338" rx="174" ry="156" fill="url(#rock)" stroke="#5b4a36" stroke-width="6"/>
+    <path d="M324,288 q42,30 30,72 M520,286 q-22,42 6,74 M430,196 q-10,42 6,68" fill="none" stroke="#5b4a36" stroke-width="2.2" opacity="0.3"/>
+    <g fill="#3fb6a3">
+      <circle cx="350" cy="292" r="9" filter="url(#glow)"/><circle cx="350" cy="292" r="6"/>
+      <circle cx="408" cy="252" r="7" filter="url(#glow)"/><circle cx="408" cy="252" r="5"/>
+      <circle cx="500" cy="320" r="8" filter="url(#glow)"/><circle cx="500" cy="320" r="5"/>
+      <circle cx="372" cy="384" r="7" filter="url(#glow)"/><circle cx="372" cy="384" r="4.5"/>
+      <circle cx="468" cy="398" r="6" filter="url(#glow)"/><circle cx="468" cy="398" r="4"/>
+    </g>
+    <!-- NO face: intentionally blank -->
+
+    <!-- ===== leg 1: front-left (splayed out) ===== -->
+    <g stroke="#5b4a36" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M330,468 q-66,80 -70,156 l64,0 q22,-78 22,-160 z" fill="#a8967a"/>
+      <g fill="none" stroke-width="5"><path d="M262,620 l-8,28"/><path d="M290,628 l-2,28"/><path d="M318,622 l6,28"/></g>
+    </g>
+    <!-- ===== leg 2: front-right (splayed out) ===== -->
+    <g stroke="#5b4a36" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M530,468 q66,80 70,156 l-64,0 q-22,-78 -22,-160 z" fill="#a8967a"/>
+      <g fill="none" stroke-width="5"><path d="M598,620 l8,28"/><path d="M570,628 l2,28"/><path d="M542,622 l-6,28"/></g>
+    </g>
+
+    <!-- ===== arm: left (short, held in front) ===== -->
+    <g stroke="#5b4a36" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M298,404 q-52,4 -78,40 q18,22 52,14 q20,-30 34,-44 z" fill="#b3a182"/>
+      <g fill="none" stroke-width="5"><path d="M222,448 l-22,12"/><path d="M230,460 l-20,18"/><path d="M242,468 l-14,22"/></g>
+    </g>
+    <!-- ===== arm: right (short, held in front) ===== -->
+    <g stroke="#5b4a36" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M562,404 q52,4 78,40 q-18,22 -52,14 q-20,-30 -34,-44 z" fill="#b3a182"/>
+      <g fill="none" stroke-width="5"><path d="M638,448 l22,12"/><path d="M630,460 l20,18"/><path d="M618,468 l14,22"/></g>
+    </g>
+
+    <!-- ===== leg-count callouts (1·2·3) ===== -->
+    <g font-family="Patrick Hand, cursive" font-size="22" fill="#a85f24" text-anchor="middle">
+      <text x="292" y="690">1</text><text x="430" y="690">3</text><text x="568" y="690">2</text>
+    </g>
+
+    <!-- ===== annotation lines + labels ===== -->
+    <g stroke="#5b4a36" stroke-width="1.4" opacity="0.5" fill="none">
+      <path d="M548,232 L724,196"/>
+      <path d="M352,294 L200,240"/>
+      <path d="M224,452 L150,492"/>
+      <path d="M600,622 L724,632"/>
+    </g>
+    <g font-family="Patrick Hand, cursive" font-size="21" fill="#3c3328">
+      <text x="904" y="190" text-anchor="end">无脸 · 圆石身体</text>
+      <text x="904" y="214" text-anchor="end" font-size="16" fill="#9c8d76">无眼、无嘴</text>
+      <text x="184" y="236" text-anchor="end">teal 荧光斑</text>
+      <text x="20" y="498">2 条上肢（短臂）</text>
+      <text x="20" y="522" font-size="16" fill="#a85f24">每只手 3 指</text>
+      <text x="900" y="628" text-anchor="end">3 条下肢（短腿）</text>
+      <text x="900" y="652" text-anchor="end" font-size="16" fill="#a85f24">每只脚 3 趾</text>
+    </g>
+  </svg>
+  </div>
+
+  <div class="checklist">
+    <h2>✅ 必须满足的硬设定</h2>
+    <ul>
+      <li>· 单个<b>圆石身体</b>，<b>完全无脸</b>（无眼、无嘴）</li>
+      <li>· <b>恰好 5 肢</b> ＝ <b>3 条下肢（短腿）</b> ＋ <b>2 条上肢（短臂）</b></li>
+      <li>· 每条肢体末端<b>恰好 3 根手指 / 脚趾</b></li>
+      <li>· 肢体<b>短而敦实</b>，不要细长 / 蜘蛛态</li>
+      <li>· 体表淡淡的 <b>teal 青绿色荧光斑</b></li>
+      <li>· 成品风格：<b>暖色手绘水彩绘本</b>（此稿仅定形态，非最终画风）</li>
+    </ul>
+  </div>
+
+  <p class="note">
+    这是<b>形态确认稿</b>，只用来定「数量 / 结构对不对」，不是最终画风。<br/>
+    你确认 OK（或告诉我哪里要调），我就拿它当强参考，用 gpt-image-2 生成<b>水彩成品</b> hero，再据此生成开场视频。
+  </p>
+</div>
+</body>
+</html>

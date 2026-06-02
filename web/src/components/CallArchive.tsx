@@ -95,6 +95,7 @@ export function CallArchive() {
 
       <div className="pad center" style={{ paddingTop: 8 }}>
         <button className="linkish" onClick={() => setShowAbout((v) => !v)}>{t.aboutToggle}</button>
+        <button className="linkish" style={{ marginLeft: 16 }} onClick={() => dispatch({ type: 'GO', screen: 'boot' })}>{t.replayIntro}</button>
         {showAbout && <p className="fan-note" style={{ marginTop: 12 }}>{t.aboutBody}</p>}
         <p className="fan-note" style={{ marginTop: 18 }}>
           {t.fanNote}{' '}
