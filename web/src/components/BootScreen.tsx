@@ -16,7 +16,7 @@ export function BootScreen() {
           <video
             className="boot-cover fadein"
             src={ART.openingVideo}
-            poster={ART.cover}
+            poster={ART.rockyListen}
             autoPlay
             muted
             loop
