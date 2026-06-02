@@ -180,13 +180,13 @@ button { font-family: inherit; color: inherit; cursor: pointer; background: none
 /* ============================================================ BOOT */
 .boot { display: flex; min-height: 100%; flex-direction: column; padding: 20px 24px calc(56px + env(safe-area-inset-bottom, 0px)); }
 .boot-inner { width: 100%; max-width: 520px; text-align: center; margin: auto; }
-.boot-cover { width: 100%; max-height: 42dvh; object-fit: cover; border-radius: 16px; box-shadow: 0 14px 40px -18px #00000040; margin-bottom: 18px; -webkit-mask-image: radial-gradient(120% 100% at 50% 40%, #000 70%, transparent); mask-image: radial-gradient(120% 100% at 50% 40%, #000 72%, transparent); }
-.boot-log { width: 100%; max-width: 420px; margin: 0 auto 22px; text-align: left; font-family: var(--font-hand); font-size: 15px; color: var(--ink-mid); }
+.boot-cover { width: 100%; max-height: 36dvh; object-fit: cover; border-radius: 16px; box-shadow: 0 14px 40px -18px #00000040; margin-bottom: 16px; -webkit-mask-image: radial-gradient(120% 100% at 50% 40%, #000 70%, transparent); mask-image: radial-gradient(120% 100% at 50% 40%, #000 72%, transparent); }
+.boot-log { width: 100%; max-width: 420px; margin: 0 auto 16px; text-align: left; font-family: var(--font-hand); font-size: 14.5px; color: var(--ink-mid); }
 .boot-log .row { opacity: 0; animation: lineIn .4s var(--ease-out) forwards; display: flex; gap: 10px; padding: 2px 0; }
 .boot-log .ok { color: var(--teal); }
-.boot-title { font-family: var(--font-serif); font-size: clamp(34px, 10vw, 52px); font-weight: 600; letter-spacing: .04em; color: var(--ink); }
-.boot-sub { font-family: var(--font-hand); color: var(--amber); font-size: 16px; letter-spacing: .1em; margin-top: 10px; }
-.boot-tag { color: var(--ink-soft); font-size: 15.5px; margin-top: 20px; line-height: 1.95; }
+.boot-title { font-family: var(--font-serif); font-size: clamp(32px, 9vw, 44px); font-weight: 600; letter-spacing: .04em; color: var(--ink); }
+.boot-sub { font-family: var(--font-hand); color: var(--amber); font-size: 15px; letter-spacing: .1em; margin-top: 8px; }
+.boot-tag { color: var(--ink-soft); font-size: 15px; margin-top: 14px; line-height: 1.9; }
 @keyframes lineIn { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: none; } }
 
 /* Small phones: keep full-screen pages (incl. their CTA) inside one screen */
@@ -325,7 +325,7 @@ button { font-family: inherit; color: inherit; cursor: pointer; background: none
 .wave i:nth-child(2) { animation-delay: .18s; } .wave i:nth-child(3) { animation-delay: .36s; } .wave i:nth-child(4){ animation-delay:.54s } .wave i:nth-child(5){ animation-delay:.72s }
 @keyframes wavedot { 0%,100% { transform: translateY(0); opacity:.5 } 50% { transform: translateY(-3px); opacity:1 } }
 
-.dock { flex-shrink: 0; padding: 14px 20px calc(16px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--hair); background: linear-gradient(180deg, transparent, var(--paper) 45%); }
+.dock { flex-shrink: 0; padding: 14px 20px calc(16px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--hair); background: linear-gradient(180deg, transparent, var(--paper) 45%); max-height: 74dvh; overflow-y: auto; }
 .continue-row { display: flex; justify-content: center; }
 .tap-hint { font-family: var(--font-hand); color: var(--ink-faint); font-size: 15px; padding: 8px 14px; }
 .tap-hint:hover { color: var(--ink-mid); }
