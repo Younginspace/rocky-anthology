@@ -37,7 +37,7 @@ export function BootScreen() {
         <h1 className="boot-title fadein" style={{ animationDelay: '1.8s', animationFillMode: 'both' }}>{t.bootTitle}</h1>
         <div className="boot-sub fadein" style={{ animationDelay: '2.1s', animationFillMode: 'both' }}>{t.bootSub}</div>
         <p className="boot-tag fadein" style={{ animationDelay: '2.4s', animationFillMode: 'both' }}>{t.bootTag}</p>
-        <div className="fadein" style={{ animationDelay: '2.7s', animationFillMode: 'both', marginTop: 34 }}>
+        <div className="fadein" style={{ animationDelay: '2.7s', animationFillMode: 'both', marginTop: 22 }}>
           <button className="btn" onClick={() => dispatch({ type: 'BOOT_DONE' })}>
             {t.enterArchive} →
           </button>

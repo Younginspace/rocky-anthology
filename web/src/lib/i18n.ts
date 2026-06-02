@@ -32,7 +32,7 @@ export const SIGNAL_LABEL: Record<Lang, Record<SignalTier, string>> = {
 /** UI chrome strings (everything that isn't story content). */
 export const UI = {
   zh: {
-    lineName: 'ERID ↔ 地球 · 星际通讯线',
+    lineName: 'ERID ↔︎ 地球 · 星际通讯线',
     delay: '延迟 4.2s',
     inCall: '通话中',
     home: '档案',
@@ -46,7 +46,7 @@ export const UI = {
     bootLines: [
       ['ERID 深空通讯阵列', '在线'],
       ['校准星际延迟补偿', '4.2s'],
-      ['建立 ERID ↔ 地球 量子链路', '完成'],
+      ['建立 ERID ↔︎ 地球 量子链路', '完成'],
       ['格雷斯架设的开放通讯线', '已就绪'],
     ] as Array<[string, string]>,
     enterArchive: '进入通讯档案',
@@ -126,7 +126,7 @@ export const UI = {
     errWipe: '清除存档并重启',
   },
   en: {
-    lineName: 'ERID ↔ EARTH · INTERSTELLAR LINE',
+    lineName: 'ERID ↔︎ EARTH · INTERSTELLAR LINE',
     delay: 'DELAY 4.2s',
     inCall: 'IN CALL',
     home: 'Archive',
@@ -139,7 +139,7 @@ export const UI = {
     bootLines: [
       ['ERID deep-space comms array', 'ONLINE'],
       ['Calibrating interstellar delay', '4.2s'],
-      ['Establishing ERID ↔ EARTH link', 'DONE'],
+      ['Establishing ERID ↔︎ EARTH link', 'DONE'],
       ["Grace's open line", 'READY'],
     ] as Array<[string, string]>,
     enterArchive: 'Enter the archive',
